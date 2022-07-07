@@ -2,7 +2,17 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'ghost-white': '#F9F9F9',
+        'cyan-cobalt-blue': '#2555AD',
+        'ue-red': '#B30001',
+        'philippine-yellow ': '#FAC904',
+      },
+      fontFamily: {
+        'oswald': ['Oswald'],   
+      }
+    },
   },
   plugins: [],
 };

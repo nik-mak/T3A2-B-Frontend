@@ -13,7 +13,7 @@ import React, { useState } from "react";
 function FormInput({ label, type, onChange, value }) {
   return (
     <div className="flex flex-col space-y-6 font-oswald text-xl">
-      <label htmlFor={`${label}`}>{label}: </label>
+      <label htmlFor={`${label}`}>{label} </label>
       <input
         type={type || "text"}
         name={label}

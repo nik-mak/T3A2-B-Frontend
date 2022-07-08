@@ -3,8 +3,8 @@ import { useReducer } from "react";
 /**
  * ModalsReducer handles updating the close and open states for the modals
  *
- * @param {Object} modalStates The current state of the modals ({signUp: false, signIn: false})
- * @param {Object} data Information on how to update the modal ({modalName: 'signUp', action: 'close'})
+ * @param {Object} modalStates The current state of the modals (i.e. {signUp: false, signIn: false})
+ * @param {Object} data Information on how to update the modal (i.e. {modalName: 'signUp', action: 'close'})
  */
 function ModalsReducer(modalStates, data) {
   switch (data.action) {

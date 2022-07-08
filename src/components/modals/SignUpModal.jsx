@@ -29,7 +29,7 @@ function SignUpModal({ open, onClose }) {
   const formFields = [
     { label: "Full Name", name: "fullName", value: "", type: "text" },
     { label: "Email", name: "email", value: "", type: "email" },
-    { label: "Password", name: "password", value: "", type: "password" }
+    { label: "Password", name: "password", value: "", type: "password" },
   ];
   const [formData, setFormData] = useState(formFields);
 
@@ -52,15 +52,19 @@ function SignUpModal({ open, onClose }) {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style} className="flex flex-col">
-        <div onClick={onClose} className="hover:text-blue-500 w-5 h-5 self-end">
-          <CloseIcon />
+        <div onClick={onClose} className="self-end items-center flex flex-col hover:text-cyan-cobalt-blue">
+          <div className="h-5 w-5">
+              <CloseIcon />
+          </div>
+          <p className="font-oswald">close</p>
         </div>
         <Form
           formData={formData}
           setFormData={setFormData}
           handleSubmit={handleSubmit}
-          heading="Sign Up"
+          title="Sign Up"
           submitName="Sign Up"
+          heading="Join the Desperate Housewares family!"
         ></Form>
       </Box>
     </Modal>

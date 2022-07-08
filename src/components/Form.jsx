@@ -5,6 +5,7 @@ import FormInput from "./FormInput";
  * Form component used to dynamically render a form using the form fields provided in formData
  *
  * @param {Object} formData a state object containing key: value pairs that correspond to the forms data.
+ * @param {String} title the name of the form or title to be displayed on the modal
  * @param {String} heading the name of the form or heading to be displayed on the modal
  * @param {String} submitName the name of the form submit button
  * @param {Function} setFormData a callback function used to set the formData
@@ -12,7 +13,7 @@ import FormInput from "./FormInput";
  *
  * @return {HTML} a form component
  */
-function Form({ formData, heading, submitName, setFormData, handleSubmit }) {
+function Form({ formData, heading, title, submitName, setFormData, handleSubmit }) {
   /**
    * handleFormChange is used to update the formData states values when the form is changed.
    *
@@ -26,7 +27,8 @@ function Form({ formData, heading, submitName, setFormData, handleSubmit }) {
 
   return (
     <>
-      <h1 className="font-oswald text-4xl text-center p-2">{heading || ""}</h1>
+      <h1 className="font-oswald text-4xl text-center p-2">{title || ""}</h1>
+      <p className="font-oswald text-xl text-center p-3">{heading || ""}</p>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
         {formData.map((element, index) => (
           <FormInput
@@ -39,7 +41,7 @@ function Form({ formData, heading, submitName, setFormData, handleSubmit }) {
             type={element.type}
           />
         ))}
-        <button className="self-center rounded-full font-oswald text-2xl text-white bg-cyan-cobalt-blue p-2 w-[75%]">{submitName}</button>
+        <button role="button" className="self-center rounded-full font-oswald text-2xl text-white bg-cyan-cobalt-blue p-2 w-[75%]">{submitName}</button>
       </form>
     </>
   );

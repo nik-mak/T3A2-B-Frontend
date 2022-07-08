@@ -6,33 +6,40 @@ import FormInput from "./FormInput";
  *
  * @param {Object} formData a state object containing key: value pairs that correspond to the forms data.
  * @param {String} heading the name of the form or heading to be displayed on the modal
+ * @param {String} submitName the name of the form submit button
  * @param {Function} setFormData a callback function used to set the formData
  * @param {Function} handleSubmit a callback function used to handle the form submit event
- * 
- * @return {ReactFragment} form component
+ *
+ * @return {HTML} a form component
  */
-function Form({ formData, heading, setFormData, handleSubmit }) {
-  const keys = Object.keys(formData)
-
+function Form({ formData, heading, submitName, setFormData, handleSubmit }) {
   /**
-   * handleFormChange is used to update the formData states values when the form is changed. 
+   * handleFormChange is used to update the formData states values when the form is changed.
    *
    * @param {Object} event an object containing the event meta data
    */
-  function handleFormChange(event) {
-    const updatedForm = {...formData}
-    updatedForm[event.target.name] = event.target.value
-    setFormData(updatedForm)
+  function handleFormChange(index, event) {
+    const updatedForm = [ ...formData ];
+    updatedForm[index].value = event.target.value;
+    setFormData(updatedForm);
   }
-  
+
   return (
     <>
       <h1 className="font-oswald text-4xl text-center p-2">{heading || ""}</h1>
-      <form onSubmit={handleSubmit}>
-      {keys.map((key) => 
-        <FormInput key={key} label={key} onChange={handleFormChange} value={formData[`${key}`]}/>
-      )}
-      <button>Submit</button>
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
+        {formData.map((element, index) => (
+          <FormInput
+            key={element.name}
+            label={element.label}
+            onChange={(event) => {
+              handleFormChange(index, event);
+            }}
+            value={element.value}
+            type={element.type}
+          />
+        ))}
+        <button className="self-center rounded-full font-oswald text-2xl text-white bg-cyan-cobalt-blue p-2 w-[75%]">{submitName}</button>
       </form>
     </>
   );

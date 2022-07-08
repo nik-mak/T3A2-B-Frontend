@@ -11,7 +11,7 @@ const initialState = { signUp: false, signIn: false };
 /**
  * Navbar component that is fixed to the top of the screen and renders the nav items for the user.
  *
- * @return {Nav} Navbar component
+ * @return {HTML} a navbar component
  */
 function Navbar() {
   const [modalStates, setModalStates] = useModalsReducer(initialState);

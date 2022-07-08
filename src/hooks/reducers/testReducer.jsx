@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-
+// Experimental Reducer that can manage all states on the front end!
 function reducer(oldState, newState) {
     return { ...oldState, ...newState }
 }

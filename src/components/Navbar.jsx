@@ -34,7 +34,7 @@ function Navbar() {
         <NavItem itemName="Settings" onClick={() => setState(!state)}>
           <AccountIcon className={""} />
         </NavItem>
-        <ul className={`absolute left-[25px] top-[100px] ${state ? '' : 'hidden'}`}>
+        <ul className={`absolute top-[100px] bg-white ${state ? '' : 'hidden'}`}>
           <li>test1</li>
           <li>test2</li>
           <li>test3</li>

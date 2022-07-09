@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
+// Example Route for when/if our routes get more complex
 export default function UsersRoutes() {
     return (
         <Routes>

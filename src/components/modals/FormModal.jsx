@@ -40,7 +40,11 @@ function FormModal({ open, onClose, handleSubmit: propHandleSubmit, formFields, 
    */
   function handleSubmit(event) {
     event.preventDefault();
-    propHandleSubmit(formData)
+    const newFormData = formData.reduce((acc, cur) => {
+      acc[cur.name] = cur.value
+      return acc
+    }, {})
+    propHandleSubmit(newFormData)
   }
 
   return (
@@ -64,6 +68,7 @@ function FormModal({ open, onClose, handleSubmit: propHandleSubmit, formFields, 
           title={title}
           submitName={submitName}
           heading={description}
+          onSubmit={onClose}
         ></Form>
       </Box>
     </Modal>

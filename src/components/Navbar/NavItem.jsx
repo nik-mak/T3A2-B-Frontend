@@ -10,7 +10,7 @@ import React from "react";
  */
 function NavItem({onClick, itemName, children}) {
   return (
-    <div className="flex items-center justify-center pr-11">
+    <div className="flex items-center justify-center">
       <button onClick={onClick} className="flex flex-col items-center">
         {children}
         <p className="font-oswald">{itemName}</p>

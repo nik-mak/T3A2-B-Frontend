@@ -1,7 +1,10 @@
 import FormModal from "./FormModal";
-
+import api from "../../helpers/api"
+import { useContext } from "react";
+import UserContext from "../../contexts/user";
+import AlertsContext from "../../contexts/alert";
 /**
- * SignUp Modal component used to display the sign up form
+ * SignUp Modal component used to display the sign up form to create new shoppers
  *
  * @param {Boolean} open a boolean representing the open state of the modal (i.e. true for open and false for close)
  * @param {Function} onClose a callback function that handles changing the modal open state to 'close'
@@ -9,8 +12,10 @@ import FormModal from "./FormModal";
  * @returns {HTML} a sign up modal component
  */
 function SignUpModal({ open, onClose }) {
+  const setUser = useContext(UserContext)[1]
+  const [alerts, setAlerts] = useContext(AlertsContext)
   const formFields = [
-    { label: "Full Name", name: "fullName", value: "", type: "text" },
+    { label: "Full Name", name: "name", value: "", type: "text" },
     { label: "Email", name: "email", value: "", type: "email" },
     { label: "Password", name: "password", value: "", type: "password" },
   ];
@@ -21,8 +26,16 @@ function SignUpModal({ open, onClose }) {
    * @param {Object} event an object containing the event meta data
    */
   function handleSubmit(formData) {
-    console.log(formData);
-    // Todo: Send some data somewhere       !!!!!
+    api.post("/register", formData).then((response) => {
+      setUser(response.data)
+    })
+    .catch( () => { 
+      setAlerts([...alerts, {severity:"warning", message:"Test Message: User already exists"}])
+      return 
+    })
+    .finally( () => {
+      onClose()
+    })
   }
 
   const props = {

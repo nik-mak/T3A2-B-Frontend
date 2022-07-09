@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../../contexts/user";
 import FormModal from "./FormModal";
+import api from "../../helpers/api"
+import AlertsContext from "../../contexts/alert";
 
 /**
  * Login modal component used to display the login form
@@ -10,6 +13,8 @@ import FormModal from "./FormModal";
  * @returns {HTML} a login modal component
  */
 function LoginModal({ open, onClose }) {
+  const setUser = useContext(UserContext)[1]
+  const [alerts, setAlerts] = useContext(AlertsContext)
   const formFields = [
     { label: "Email", name: "email", value: "", type: "email" },
     { label: "Password", name: "password", value: "", type: "password" },
@@ -21,8 +26,17 @@ function LoginModal({ open, onClose }) {
    * @param {Object} event an object containing the event meta data
    */
   function handleSubmit(formData) {
-    console.log(formData);
-    // Todo: Send some data somewhere       !!!!!
+    api.post("/login", formData)
+    .then((response) => {
+      setUser(response.data)
+    })
+    .catch( () => { 
+      setAlerts([...alerts, {severity:"warning", message:"Test Message: User already exists"}])
+      return 
+    })
+    .finally( () => {
+      onClose()
+    })
   }
 
   const props = {

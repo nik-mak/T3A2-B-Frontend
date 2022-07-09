@@ -2,7 +2,7 @@ import FormModal from "./FormModal";
 import api from "../../helpers/api"
 import { useContext } from "react";
 import UserContext from "../../contexts/user";
-import AlertsContext from "../../contexts/alert";
+import useAlerts from "../../hooks/useAlerts";
 /**
  * SignUp Modal component used to display the sign up form to create new shoppers
  *
@@ -13,7 +13,7 @@ import AlertsContext from "../../contexts/alert";
  */
 function SignUpModal({ open, onClose }) {
   const setUser = useContext(UserContext)[1]
-  const setAlerts = useContext(AlertsContext)[1]
+  const {addAlert} = useAlerts()
   const formFields = [
     { label: "Full Name", name: "name", value: "", type: "text" },
     { label: "Email", name: "email", value: "", type: "email" },
@@ -28,10 +28,10 @@ function SignUpModal({ open, onClose }) {
   function handleSubmit(formData) {
     api.post("/register", formData).then((response) => {
       setUser(response.data)
-      setAlerts(alerts => [...alerts, {severity:"success", message:"Successfully Signed Up & Logged In"}])
+      addAlert({severity:"success", message:"Successfully Signed Up & Logged In"})
     })
     .catch( () => { 
-      setAlerts(alerts => [...alerts, {severity:"warning", message:"Test Message: User already exists"}])
+      addAlert({severity:"warning", message:"Successfully Errored"})
     })
     .finally( () => {
       onClose()

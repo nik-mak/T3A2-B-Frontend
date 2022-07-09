@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import UserContext from "../../contexts/user";
 import FormModal from "./FormModal";
 import api from "../../helpers/api"
-import AlertsContext from "../../contexts/alert";
+import useAlerts from "../../hooks/useAlerts";
 
 /**
  * Login modal component used to display the login form
@@ -14,7 +14,7 @@ import AlertsContext from "../../contexts/alert";
  */
 function LoginModal({ open, onClose }) {
   const setUser = useContext(UserContext)[1]
-  const setAlerts = useContext(AlertsContext)[1]
+  const {addAlert} = useAlerts()
   const formFields = [
     { label: "Email", name: "email", value: "", type: "email" },
     { label: "Password", name: "password", value: "", type: "password" },
@@ -29,10 +29,10 @@ function LoginModal({ open, onClose }) {
     api.post("/login", formData)
     .then((response) => {
       setUser(response.data)
-      setAlerts(alerts => [...alerts, {severity:"success", message:"Successfully Logged In"}])
+      addAlert({severity:"success", message:"Successfully Logged In"})
     })
     .catch( () => { 
-      setAlerts(alerts => [...alerts, {severity:"warning", message:"Test Message: User already exists"}])
+      addAlert({severity:"warning", message:"Successfully ERRORED"})
     })
     .finally( () => {
       onClose()

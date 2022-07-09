@@ -34,7 +34,7 @@ function FormModal({ open, onClose, handleSubmit: propHandleSubmit, formFields, 
   const [formData, setFormData] = useState(formFields);
 
   /**
-   * handle Submit is used to describe where to send the data when the form is complete by calling the propHandleSubmit callback.
+   * handle Submit is used to translate the data into the format for the backend where it is sent to the propHandleSubmit callback.
    *
    * @param {Object} event an object containing the event meta data
    */

@@ -13,7 +13,7 @@ import AlertsContext from "../../contexts/alert";
  */
 function SignUpModal({ open, onClose }) {
   const setUser = useContext(UserContext)[1]
-  const [alerts, setAlerts] = useContext(AlertsContext)
+  const setAlerts = useContext(AlertsContext)[1]
   const formFields = [
     { label: "Full Name", name: "name", value: "", type: "text" },
     { label: "Email", name: "email", value: "", type: "email" },
@@ -21,17 +21,17 @@ function SignUpModal({ open, onClose }) {
   ];
 
   /**
-   * handle Submit is used to describe where to send the data when the sign up form is completed.
+   * handle Submit is used to describe where to send the data when the sign up form is completed. On success will log in the user and render a success alert. If not successful will render a warning alert.
    *
    * @param {Object} event an object containing the event meta data
    */
   function handleSubmit(formData) {
     api.post("/register", formData).then((response) => {
       setUser(response.data)
+      setAlerts(alerts => [...alerts, {severity:"success", message:"Successfully Signed Up & Logged In"}])
     })
     .catch( () => { 
-      setAlerts([...alerts, {severity:"warning", message:"Test Message: User already exists"}])
-      return 
+      setAlerts(alerts => [...alerts, {severity:"warning", message:"Test Message: User already exists"}])
     })
     .finally( () => {
       onClose()

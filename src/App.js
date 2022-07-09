@@ -5,13 +5,6 @@ import ReactHome from "./pages/ReactHome";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Alerts from "./components/Alerts";
 import GlobalContexts from "./components/GlobalContexts";
-// import UsersRoutes from "./routes/users";
-
-// const userData = {
-//   name: '',
-//   email: '',
-//   roles: '',
-// }
 
 function App() {
   return (

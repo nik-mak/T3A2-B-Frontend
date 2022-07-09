@@ -3,6 +3,7 @@ import React from "react";
 import { useContext } from "react";
 import AlertsContext from "../contexts/alert";
 
+// Alerts component that handles rendering and closing error messages
 function Alerts() {
   const [alerts, setAlerts] = useContext(AlertsContext);
   return (

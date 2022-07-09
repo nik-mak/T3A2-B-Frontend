@@ -2,6 +2,12 @@ import React, { useState } from 'react'
 import AlertsContext from '../contexts/alert'
 import UserContext from '../contexts/user'
 
+// 
+ /**
+   * GlobalContext is a wrapper to combine all contexts into one component
+   *
+   * @param {HTML} children child components
+   */
 function GlobalContexts({children}) {
     const [user, setUser] = useState()
     const [alerts, setAlerts] = useState([])

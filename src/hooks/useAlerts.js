@@ -1,7 +1,11 @@
 import { useContext } from "react";
 import AlertsContext from "../contexts/alert";
-// Experimental Reducer that can manage all states on the front end!
 
+ /**
+   * useAlerts hook that is used to add and remove Alerts
+   *
+   * @return {Object} an object containing the alerts state and the addAlerts and removeAlert functions
+   */
 export default function useAlerts() {
   const [alerts, setAlerts] = useContext(AlertsContext)
 

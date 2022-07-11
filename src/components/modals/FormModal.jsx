@@ -7,10 +7,7 @@ import CloseIcon from "../Icons/CloseIcon";
 // Default styling for the modal box
 const style = {
   position: "absolute",
-  top: "50%",
   left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
   bgcolor: "white",
   border: "2px solid #000",
   boxShadow: 24,
@@ -30,7 +27,15 @@ const style = {
  *
  * @returns {HTML} a modal component with a form
  */
-function FormModal({ open, onClose, handleSubmit: propHandleSubmit, formFields, title, submitName, description }) {
+function FormModal({
+  open,
+  onClose,
+  handleSubmit: propHandleSubmit,
+  formFields,
+  title,
+  submitName,
+  description,
+}) {
   const [formData, setFormData] = useState(formFields);
 
   /**
@@ -41,10 +46,10 @@ function FormModal({ open, onClose, handleSubmit: propHandleSubmit, formFields, 
   function handleSubmit(event) {
     event.preventDefault();
     const newFormData = formData.reduce((acc, cur) => {
-      acc[cur.name] = cur.value
-      return acc
-    }, {})
-    propHandleSubmit(newFormData)
+      acc[cur.name] = cur.value;
+      return acc;
+    }, {});
+    propHandleSubmit(newFormData);
   }
 
   return (
@@ -53,11 +58,18 @@ function FormModal({ open, onClose, handleSubmit: propHandleSubmit, formFields, 
       onClose={onClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      className="overflow-auto hover:overflow-scroll"
     >
-      <Box sx={style} className="flex flex-col">
-        <button onClick={onClose} className="self-end items-center flex flex-col hover:text-cyan-cobalt-blue">
+      <Box
+        sx={style}
+        className="flex w-full translate-y-[0] translate-x-[-50%] flex-col sm:top-[50%] sm:w-96 sm:translate-y-[-50%] tall:top-0 tall:translate-y-[0]"
+      >
+        <button
+          onClick={onClose}
+          className="flex flex-col items-center self-end hover:text-cyan-cobalt-blue"
+        >
           <div className="h-5 w-5">
-              <CloseIcon />
+            <CloseIcon />
           </div>
           <p className="font-oswald">close</p>
         </button>

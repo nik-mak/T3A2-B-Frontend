@@ -12,8 +12,16 @@ Create fetch request to post sign up (tic)
 
 Create fetch request to post sign in (tic)
 
-Automate request to verify user signed in on refresh (waiting on backend)
+Automate request to verify user signed in on refresh (tic)
 
 Create a context containing the userData (tic)
 
-Create an Alert to display error messages
+Create an Alert to display error messages (tic)
+
+Create the logout nav-item and fetch post it to the logout api auth route
+
+Update modals so that they become more responsive
+
+Adjust which buttons get rendered in the nav depending on the if the user is logged in and their role
+
+Test features in excel spreadsheet09

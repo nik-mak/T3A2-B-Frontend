@@ -15,7 +15,7 @@ function App() {
         <Navbar />
         <Alerts />
         <Routes>
-          <Route path="/" element={<Catalogue />} />
+          <Route path="/" element={<ReactHome />} />
           <Route path="/admin" element={<ReactHome />} />
           <Route path="/bag" element={<ReactHome />} />
         </Routes>

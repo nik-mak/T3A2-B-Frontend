@@ -2,6 +2,12 @@ import React from "react";
 import heroimg from "../assets/heroimg.jpg";
 import HeartIcon from "./Icons/HeartIcon";
 
+const style={
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+}
+
 function HeroBanner() {
   return (
     <section className="relative">
@@ -13,8 +19,8 @@ function HeroBanner() {
           className="absolute z-0 h-full w-full object-cover"
         ></img>
       </div>
-      <div className="absolute inset-1/2 translate-y-[-50%] translate-x-[-50%]">
-        <HeartIcon className="fill-slate-200" />
+      <div className="absolute z-20" style={style}>
+        <HeartIcon className="fill-white" />
       </div>
     </section>
   );

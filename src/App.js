@@ -8,6 +8,7 @@ import GlobalContexts from "./components/GlobalContexts";
 import Catalogue from "./pages/Catalogue";
 
 function App() {
+
   return (
     <GlobalContexts>
       <BrowserRouter>

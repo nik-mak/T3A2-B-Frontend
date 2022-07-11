@@ -11,6 +11,9 @@ module.exports = {
       },
       fontFamily: {
         'oswald': ['Oswald'],   
+      },
+      screens: {
+        'tall': { 'raw': '(max-height:700px)'}
       }
     },
   },

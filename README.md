@@ -20,7 +20,7 @@ Create an Alert to display error messages (tic)
 
 Create the logout nav-item and fetch post it to the logout api auth route (tic)
 
-Update modals so that they become more responsive 
+Update modals so that they become more responsive (tic)
 
 Adjust which buttons get rendered in the nav depending on the if the user is logged in and their role
 

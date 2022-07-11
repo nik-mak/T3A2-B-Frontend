@@ -15,7 +15,7 @@ const style = {
 };
 
 /**
- * Form modal component used to dynamically render a form modal
+ * Form modal component used to dynamically render a responsive form modal
  *
  * @param {Boolean} open a boolean representing the open state of the modal (i.e. true for open and false for close)
  * @param {Function} onClose a callback function that handles changing the modal open state to 'close'

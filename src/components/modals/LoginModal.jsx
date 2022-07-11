@@ -26,7 +26,7 @@ function LoginModal({ open, onClose }) {
    * @param {Object} event an object containing the event meta data
    */
   function handleSubmit(formData) {
-    api.post("/login", formData)
+    api.post("/auth/login", formData)
     .then((response) => {
       setUser(response.data)
       addAlert({severity:"success", message:"Successfully Logged In"})

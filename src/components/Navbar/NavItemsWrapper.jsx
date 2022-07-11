@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import SettingsIcon from "../Icons/SettingsIcon";
 import LoginModal from "../modals/LoginModal";
 import SignUpModal from "../modals/SignUpModal";
@@ -28,18 +28,18 @@ function NavItemsWrapper() {
   const [modalStates, setModalStates] = useModalsReducer(initialState);
   const [settingsState, setSettingsState] = useState(false);
   // defines the states of the user and a dispatch method
-  const [user, setUser] = useContext(UserContext);
+  const setUser = useContext(UserContext)[1];
   // defines the alerts dispatch method
   const { addAlert } = useAlerts();
 
-  useEffect(() => {
-    setUser({ name: "Jonno", role: "staff" });
-  }, []);
+  // useEffect(() => {
+  //   setUser({ name: "Jonno", role: "staff" });
+  // }, []);
 
   // A function to handle the onclick logout action for the logout nav item.
   function handleLogout() {
     api
-      .post("/logout")
+      .post("/auth/logout")
       .then((response) => {
         setUser(undefined);
         addAlert({ severity: "success", message: "Successfully Logged Out" });
@@ -54,7 +54,7 @@ function NavItemsWrapper() {
 
   return (
     <div className="flex space-x-5 pr-5 sm:space-x-10 sm:pr-10">
-      {/* Sign Up Nav item */}
+        {/* Sign Up Nav item */}
       <NotLoggedIn>
         <NavItem
           onClick={() =>
@@ -99,14 +99,20 @@ function NavItemsWrapper() {
         </div>
       </HasRole>
       {/* Modals */}
-      <SignUpModal
-        open={modalStates.signUp}
-        onClose={() => setModalStates({ modalName: "signUp", action: "close" })}
-      />
-      <LoginModal
-        open={modalStates.login}
-        onClose={() => setModalStates({ modalName: "login", action: "close" })}
-      />
+      <NotLoggedIn>
+        <SignUpModal
+          open={modalStates.signUp}
+          onClose={() =>
+            setModalStates({ modalName: "signUp", action: "close" })
+          }
+        />
+        <LoginModal
+          open={modalStates.login}
+          onClose={() =>
+            setModalStates({ modalName: "login", action: "close" })
+          }
+        />
+      </NotLoggedIn>
     </div>
   );
 }

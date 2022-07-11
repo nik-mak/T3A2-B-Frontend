@@ -26,7 +26,7 @@ function SignUpModal({ open, onClose }) {
    * @param {Object} event an object containing the event meta data
    */
   function handleSubmit(formData) {
-    api.post("/register", formData).then((response) => {
+    api.post("/auth/register", formData).then((response) => {
       setUser(response.data)
       addAlert({severity:"success", message:"Successfully Signed Up & Logged In"})
     })

@@ -6,7 +6,7 @@ import useAlerts from "../hooks/useAlerts";
 function Alerts() {
   const { alerts, removeAlert } = useAlerts();
   return (
-    <section className="fixed flex w-full flex-col items-center space-y-1 pt-1">
+    <section className="fixed flex w-full flex-col items-center space-y-1 pt-1 z-50">
       {alerts.map((alert, index) => (
         <Alert
           severity={alert.severity}

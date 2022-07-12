@@ -1,6 +1,7 @@
 import React from "react";
 import BlankImageIcon from "./Icons/BlankImageIcon";
 
+// Fake Listing Card for Testing Purposes
 function FakeListing() {
   return (
     <div className="m-4 flex flex-col space-y-4 bg-white p-2 font-oswald text-lg shadow-custom">

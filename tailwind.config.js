@@ -4,19 +4,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'ghost-white': '#F9F9F9',
-        'cyan-cobalt-blue': '#2555AD',
-        'ue-red': '#B30001',
-        'philippine-yellow ': '#FAC904',
+        "ghost-white": "#F9F9F9",
+        "cyan-cobalt-blue": "#2555AD",
+        "ue-red": "#B30001",
+        "philippine-yellow ": "#FAC904",
       },
       fontFamily: {
-        'oswald': ['Oswald'],
+        oswald: ["Oswald"],
       },
       screens: {
-        'tall': { 'raw': '(max-height:700px)'}
+        tall: { raw: "(max-height:700px)" },
       },
       boxShadow: {
-        'custom': '2px 2px 2px 2px rgba(0, 0, 0, .1)'
+        card: "5px 10px 10px 5px rgba(0, 0, 0, 0.3)",
+        custom: "2px 2px 2px 2px rgba(0, 0, 0, .1)",
       },
     },
   },

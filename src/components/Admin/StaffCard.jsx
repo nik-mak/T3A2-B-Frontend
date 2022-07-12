@@ -1,10 +1,10 @@
 import React from "react";
 import Staff from "./Staff";
 
-const StaffCard = () => {
+const StaffCard = ({ staff }) => {
   return (
-    <div className="w-64 h-32 border-solid border-2 mx-2 my-2 border-indigo-600">
-      {/* <Staff /> */}
+    <div className="m-2 h-28 w-64 shadow-custom">
+      <Staff staff={staff} />
     </div>
   );
 };

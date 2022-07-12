@@ -10,7 +10,7 @@ module.exports = {
         'philippine-yellow ': '#FAC904',
       },
       fontFamily: {
-        'oswald': ['Oswald'],   
+        'oswald': ['Oswald'],
       },
       screens: {
         'tall': { 'raw': '(max-height:700px)'}

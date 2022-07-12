@@ -17,7 +17,7 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <h1 className="mt-16 text-center font-oswald text-5xl">Dashboard</h1>
+      <h1 className="mt-16 text-center font-oswald text-5xl">Admin Dashboard</h1>
       <div className="flex flex-col items-center">
         <div>
           <StaffCardCollection staff={staff} />

@@ -9,7 +9,6 @@ import Catalogue from "./pages/Catalogue";
 import Bag from "./pages/Bag";
 
 function App() {
-
   return (
     <GlobalContexts>
       <BrowserRouter>

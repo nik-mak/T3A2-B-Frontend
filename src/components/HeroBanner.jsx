@@ -2,18 +2,25 @@ import React from "react";
 import HeroImage from "./HeroImage";
 import HeartIcon from "./Icons/HeartIcon";
 
+// Heart svg styling to position it correctly.
 const heartStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
 };
 
+// Mission Statement styling to position it correctly.
 const missionStyle = {
   top: "100%",
   left: "50%",
   transform: "translate(-50%, -50%)",
 }
 
+/**
+ * HeroBanner is a component that handles rendering the hero banner at the top of the website
+ *
+ * @return {HTML} a relatively positioned hero section for the desperate housewares website
+ */
 function HeroBanner() {
   return (
     <section className="relative">

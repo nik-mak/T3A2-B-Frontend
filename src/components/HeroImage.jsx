@@ -1,6 +1,11 @@
 import React from "react";
 import heroimg from "../assets/heroimg.jpg";
 
+/**
+ * HeroImage is a component that handles rendering the hero image for the website
+ *
+ * @return {HTML} a relatively positioned hero images for the desperate housewares website
+ */
 function HeroImage() {
   return (
     <div className="relative h-96 w-full">

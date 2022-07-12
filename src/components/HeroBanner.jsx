@@ -1,26 +1,32 @@
 import React from "react";
-import heroimg from "../assets/heroimg.jpg";
+import HeroImage from "./HeroImage";
 import HeartIcon from "./Icons/HeartIcon";
 
-const style={
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+const heartStyle = {
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+};
+
+const missionStyle = {
+  top: "100%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
 }
 
 function HeroBanner() {
   return (
     <section className="relative">
-      <div className="relative h-96 w-full">
-        <div className="absolute z-10 h-full w-full bg-black opacity-25"></div>
-        <img
-          src={heroimg}
-          alt="clothing rack being opened"
-          className="absolute z-0 h-full w-full object-cover"
-        ></img>
+      <HeroImage />
+      <div className="absolute z-20" style={heartStyle}>
+        <HeartIcon className="w-14 fill-white hover:fill-rose-700 sm:w-24 xl:w-28" />
       </div>
-      <div className="absolute z-20" style={style}>
-        <HeartIcon className="fill-white" />
+      <div className="absolute flex w-4/5 md:w-2/5 flex-col space-y-4 rounded-lg bg-ghost-white py-11 text-center drop-shadow-lg z-10" style={missionStyle}>
+        <h2 className="inline font-oswald text-2xl md:text-3xl xl:text-4xl">Our Mission</h2>
+        <p className="inline font-oswald text-xl md:text-xl xl:text-2xl font-light">
+          Shining light on community-driven op shops so you can thrive on your
+          next thrift!
+        </p>
       </div>
     </section>
   );

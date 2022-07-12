@@ -54,7 +54,7 @@ function NavItemsWrapper() {
 
   return (
     <div className="flex space-x-5 pr-5 sm:space-x-10 sm:pr-10">
-        {/* Sign Up Nav item */}
+      {/* Sign Up Nav item */}
       <NotLoggedIn>
         <NavItem
           onClick={() =>

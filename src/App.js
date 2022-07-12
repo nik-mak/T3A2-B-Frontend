@@ -10,7 +10,6 @@ import AdminDashboard from "./pages/AdminDashboard";
 // import Catalogue from "./pages/Catalogue";
 
 function App() {
-
   return (
     <GlobalContexts>
       <BrowserRouter>

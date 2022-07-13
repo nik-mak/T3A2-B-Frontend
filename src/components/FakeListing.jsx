@@ -11,7 +11,7 @@ function FakeListing() {
         <h3>Size: Medium</h3>
         <h3>Price: $X.0</h3>
       </div>
-      <button className="w-1/2 self-center rounded-full border border-slate-300 bg-ghost-white py-2">
+      <button className="w-1/2 self-center rounded-full border border-slate-300 bg-ghost-white py-2 hover:bg-slate-100">
         + Add to cart
       </button>
     </div>

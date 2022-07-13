@@ -63,8 +63,8 @@ function FormModal({
       }, {});
     }
     propHandleSubmit(newFormData);
-    // onClose ensures it closes on submit and setFormData clears the form.
-    setFormData(formFields)
+    // ensures that the FormData is cleared after each submit
+    setFormData(formFields);
   }
 
   return (

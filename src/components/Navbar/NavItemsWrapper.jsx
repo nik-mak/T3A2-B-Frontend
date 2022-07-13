@@ -119,13 +119,13 @@ function NavItemsWrapper() {
             setModalStates({ modalName: "login", action: "close" })
           }
         />
+      </NotLoggedIn>
         <AddListingModal
         open={modalStates.addListing}
         onClose={() => 
           setModalStates({modalName:"addListing", action: "close"})
         }
         />
-      </NotLoggedIn>
     </div>
   );
 }

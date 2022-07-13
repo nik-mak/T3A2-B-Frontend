@@ -3,7 +3,6 @@ import React from "react";
 function BlankImageIcon() {
   return (
     <svg
-      width="full"
       height="180"
       viewBox="0 0 243 180"
       fill="none"

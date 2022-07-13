@@ -45,11 +45,21 @@ function FormModal({
    */
   function handleSubmit(event) {
     event.preventDefault();
-    const newFormData = formData.reduce((acc, cur) => {
-      acc[cur.name] = cur.value;
-      return acc;
-    }, {});
-    propHandleSubmit(newFormData);
+
+    // Testing !!!
+    if (formData.some((element) => element.type === "file")) {
+      const fileFormData = new FormData();
+      formData.map((element) => {
+        return fileFormData.append(element.name, element.value);
+      });
+      propHandleSubmit(fileFormData);
+    } else {
+      const jsonFormData = formData.reduce((acc, cur) => {
+        acc[cur.name] = cur.value;
+        return acc;
+      }, {});
+      propHandleSubmit(jsonFormData);
+    }
   }
 
   return (

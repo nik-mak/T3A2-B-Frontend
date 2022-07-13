@@ -28,6 +28,7 @@ function AddListingModal({ open, onClose }) {
    * @param {Object} event an object containing the event meta data
    */
   function handleSubmit(formData) {
+
     console.log(formData);
     api
       .post("/items/add", formData)

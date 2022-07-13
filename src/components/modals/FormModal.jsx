@@ -20,7 +20,7 @@ const style = {
  * @param {Boolean} open a boolean representing the open state of the modal (i.e. true for open and false for close)
  * @param {Function} onClose a callback function that handles changing the modal open state to 'close'
  * @param {Function} handleSubmit a callback function for the form submit action
- * @param {Object} handleSubmit an form fields object containing the form fields to be converted into a state
+ * @param {Object} formFields is an form fields object containing the form fields to be converted into a state
  * @param {String} title the modals title
  * @param {String} submitName the name to be shown on the submit button
  * @param {String} description the description of the modal to be rendered below the modal header
@@ -46,20 +46,25 @@ function FormModal({
   function handleSubmit(event) {
     event.preventDefault();
 
+    let newFormData;
+
     // Testing !!!
     if (formData.some((element) => element.type === "file")) {
-      const fileFormData = new FormData();
+      newFormData = new FormData();
       formData.map((element) => {
-        return fileFormData.append(element.name, element.value);
+        console.log(element);
+        if (element.type === "file") {
+          return newFormData.append(element.name, element.file);
+        }
+        return newFormData.append(element.name, element.value);
       });
-      propHandleSubmit(fileFormData);
     } else {
-      const jsonFormData = formData.reduce((acc, cur) => {
+      newFormData = formData.reduce((acc, cur) => {
         acc[cur.name] = cur.value;
         return acc;
       }, {});
-      propHandleSubmit(jsonFormData);
     }
+    propHandleSubmit(newFormData);
   }
 
   return (

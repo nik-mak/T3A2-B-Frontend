@@ -19,7 +19,7 @@ function AddListingModal({ open, onClose }) {
     { label: "Name", name: "name", value: "", type: "text" },
     { label: "Price", name: "price", value: "", type: "number" },
     { label: "Size", name: "size", value: "", type: "text" },
-    { label: "Image", name: "image", value: "", type: "file" },
+    { label: "Image", name: "image", value: "", type: "file", file: null },
   ];
 
   /**
@@ -28,7 +28,6 @@ function AddListingModal({ open, onClose }) {
    * @param {Object} event an object containing the event meta data
    */
   function handleSubmit(formData) {
-
     console.log(formData);
     api
       .post("/items/add", formData)

@@ -29,7 +29,11 @@ function Form({
    */
   function handleFormChange(index, event) {
     const updatedForm = [...formData];
-    updatedForm[index].value = event.target.value;
+    if(event.currentTarget.type === "file") {
+      updatedForm[index].file = event.target.files[0];
+    } else {
+      updatedForm[index].value = event.target.value;
+    }
     setFormData(updatedForm);
   }
 
@@ -45,6 +49,7 @@ function Form({
             onChange={(event) => {
               handleFormChange(index, event);
             }}
+            file={element.file}
             value={element.value}
             type={element.type}
           />

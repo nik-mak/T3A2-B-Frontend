@@ -37,7 +37,6 @@ function FormModal({
   description,
 }) {
   const [formData, setFormData] = useState(formFields);
-
   /**
    * handle Submit is used to translate the data into the format for the backend where it is sent to the propHandleSubmit callback.
    *
@@ -48,7 +47,6 @@ function FormModal({
 
     let newFormData;
 
-    // Testing !!!
     if (formData.some((element) => element.type === "file")) {
       newFormData = new FormData();
       formData.map((element) => {
@@ -65,6 +63,8 @@ function FormModal({
       }, {});
     }
     propHandleSubmit(newFormData);
+    // onClose ensures it closes on submit and setFormData clears the form.
+    setFormData(formFields)
   }
 
   return (

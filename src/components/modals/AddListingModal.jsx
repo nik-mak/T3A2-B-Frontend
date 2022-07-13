@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import UserContext from "../../contexts/user";
 import api from "../../helpers/api";
 import useAlerts from "../../hooks/useAlerts";
@@ -17,7 +17,7 @@ function AddListingModal({ open, onClose }) {
   const { addAlert } = useAlerts();
   const formFields = [
     { label: "Name", name: "name", value: "", type: "text" },
-    { label: "Price", name: "price", value: "", type: "number" },
+    { label: "Price (AUD)", name: "price", value: "", type: "number" },
     { label: "Size", name: "size", value: "", type: "text" },
     { label: "Image", name: "image", value: "", type: "file", file: null },
   ];
@@ -32,8 +32,8 @@ function AddListingModal({ open, onClose }) {
     api
       .post("/items/add", formData)
       .then((response) => {
-        setUser(response.data);
         addAlert({ severity: "success", message: "Successfully Posted Item" });
+        setUser(response.data);
       })
       .catch(() => {
         addAlert({ severity: "warning", message: "Successfully ERRORED" });

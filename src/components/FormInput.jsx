@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 /**
  * FormInput component that generates form labels and inputs.
@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 function FormInput({ label, type, onChange, value, file }) {
   const isImage = file !== undefined
   const extraProps = {};
+  // Checks if the input field is for an image and sets any extra props required to handle upload
   if (isImage) {
     extraProps.accept = ".jpg, .gif, .png";
     extraProps.file = file;
@@ -29,6 +30,7 @@ function FormInput({ label, type, onChange, value, file }) {
         onChange={onChange}
         className="rounded border border-slate-300 p-2 text-xl font-light"
         {...extraProps}
+        required
       />
     </div>
   );

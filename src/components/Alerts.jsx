@@ -11,7 +11,7 @@ function Alerts() {
         <Alert
           severity={alert.severity}
           key={`Alert_${index}`}
-          className="w-2/5"
+          className="w-2/5 z-50"
           onClose={() => {
             removeAlert(index);
           }}

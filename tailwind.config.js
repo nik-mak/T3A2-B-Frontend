@@ -8,6 +8,7 @@ module.exports = {
         'cyan-cobalt-blue': '#2555AD',
         'ue-red': '#B30001',
         'philippine-yellow ': '#FAC904',
+        'checkout-blue': '#2B62C2'
       },
       fontFamily: {
         'oswald': ['Oswald'],

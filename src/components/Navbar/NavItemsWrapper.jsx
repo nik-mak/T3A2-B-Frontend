@@ -14,9 +14,11 @@ import useAlerts from "../../hooks/useAlerts";
 import HasRole from "../Auth/HasRole";
 import LoggedIn from "../Auth/LoggedIn";
 import NotLoggedIn from "../Auth/NotLoggedIn";
+import AddListingIcon from "../Icons/AddListingIcon";
+import AddListingModal from "../modals/AddListingModal";
 
 // Defines the modals used in the Navbar
-const initialState = { signUp: false, login: false };
+const initialState = { signUp: false, login: false, addListing: false };
 
 /**
  * Nav Item wrapper that contains nav items and relevant modals
@@ -31,10 +33,6 @@ function NavItemsWrapper() {
   const setUser = useContext(UserContext)[1];
   // defines the alerts dispatch method
   const { addAlert } = useAlerts();
-
-  // useEffect(() => {
-  //   setUser({ name: "Jonno", role: "staff" });
-  // }, []);
 
   // A function to handle the onclick logout action for the logout nav item.
   function handleLogout() {
@@ -54,6 +52,15 @@ function NavItemsWrapper() {
 
   return (
     <div className="flex space-x-5 pr-5 sm:space-x-10 sm:pr-10">
+      {/* Create Listing Nav Item */}
+      <NavItem
+        onClick={() =>
+          setModalStates({ modalName: "addListing", action: "open" })
+        }
+        itemName="+Listing"
+      >
+        <AddListingIcon />
+      </NavItem>
       {/* Sign Up Nav item */}
       <NotLoggedIn>
         <NavItem
@@ -113,6 +120,12 @@ function NavItemsWrapper() {
           }
         />
       </NotLoggedIn>
+        <AddListingModal
+        open={modalStates.addListing}
+        onClose={() => 
+          setModalStates({modalName:"addListing", action: "close"})
+        }
+        />
     </div>
   );
 }

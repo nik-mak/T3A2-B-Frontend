@@ -11,7 +11,7 @@ import React from "react";
 function NavItem({onClick, itemName, children}) {
   return (
     <div className="flex items-center justify-center hover:text-cyan-cobalt-blue">
-      <button onClick={onClick} className="flex flex-col items-cente">
+      <button onClick={onClick} className="flex flex-col items-center">
         {children}
         <p className="font-oswald">{itemName}</p>
       </button>

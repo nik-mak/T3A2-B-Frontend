@@ -1,6 +1,12 @@
 import React from "react";
 import StaffCard from "./StaffCard";
 
+/**
+ * Admin component that renders a component with a collection of all staff and admin accounts
+ *
+ * @returns {HTML} collection of staff and admin component
+ */
+
 function StaffCardCollection({ staff, setStaff }) {
   return (
     <>

@@ -2,7 +2,15 @@ import React from "react";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import api from "../../helpers/api";
 
+/**
+ * Staff component that is used to display the staff/admin info on a card & a remove button to delete an account.
+ *
+ * @param {State} param The state containing all the staff and admin account info
+ * @param {Callback} param callback function to alter the staff state
+ * @returns
+ */
 const Staff = ({ staff, setStaff }) => {
+  // onClick callback to remove/delete a staff account
   async function removeStaff(e) {
     e.preventDefault();
     api.delete(`/admin/${staff._id}`).then(() => {

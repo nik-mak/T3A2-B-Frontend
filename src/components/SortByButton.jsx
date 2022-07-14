@@ -9,7 +9,7 @@ import React from "react";
  *
  * @return {HTML} a sort by button that calls an onChange function that is passed in as a prop
  */
-function SortByButton({ options, onChange, selected, setSelected }) {
+function SortByButton({ options, onChange, selected }) {
   /**
    * Event Handler called when there is a change in select component
    *

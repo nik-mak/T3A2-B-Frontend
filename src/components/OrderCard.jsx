@@ -2,6 +2,18 @@ import React, { useState } from "react";
 import HasRole from "./Auth/HasRole";
 import CartCard from "./CartCard";
 
+/**
+ * ListingCard is a component that handles rendering a listing card to be displayed in the catalogue
+ * 
+ * @param {Number} index the order number for the card
+ * @param {Date} date the date the order was placed
+ * @param {String} shopperName the shoppers name
+ * @param {Array} items an array containing the listing items purchased in the order
+ * @param {Number} totalPrice the total price of the order
+ * @param {Boolean} collected a boolean representing true if the order has been collected
+ *
+ * @return {HTML} a listing card 
+ */
 function OrderCard({ index, date, shopperName, items, totalPrice, collected }) {
   const [iscollected, setIsCollected] = useState(collected);
   function handler() {}

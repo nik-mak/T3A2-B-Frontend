@@ -1,6 +1,12 @@
 import React from "react";
 import DollarSignIcon from "./Icons/DollarSignIcon";
 
+
+/**
+ * CartCard is a component that handles rendering a listing card styled like a cart item
+ *
+ * @return {HTML} a styled card
+ */
 function CartCard({ name, image, price, size }) {
   return (
     <div className="flex w-[300px] flex-row shadow-custom">

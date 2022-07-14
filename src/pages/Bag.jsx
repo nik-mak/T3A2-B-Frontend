@@ -3,6 +3,11 @@ import OrderCard from "../components/OrderCard";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";
 
+/**
+ * Bag is a component that handles rendering the bag page for the website
+ *
+ * @return {HTML} the bag page for the desperate housewares website
+ */
 function Bag() {
   const { addAlert } = useAlerts();
   const orders = useState([
@@ -18,7 +23,7 @@ function Bag() {
       name: "Sam Fletching",
       totalPrice: 99,
       orderDate: Date.now(),
-      collected: false
+      collected: false,
     },
   ])[0];
 
@@ -35,7 +40,7 @@ function Bag() {
 
   return (
     <>
-      <h1 className="mt-16 mb-5 text-center font-oswald text-5xl mb-10">
+      <h1 className="mt-16 mb-10 text-center font-oswald text-5xl">
         Items On Hold
       </h1>
       <section className="grid grid-flow-row auto-rows-max grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">

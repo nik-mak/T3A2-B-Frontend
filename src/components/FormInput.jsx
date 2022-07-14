@@ -10,16 +10,27 @@ import React from "react";
  *
  * @returns {HTML} a form input component
  */
-function FormInput({ label, type, onChange, value }) {
+function FormInput({ label, type, onChange, value, file }) {
+  const isImage = file !== undefined
+  const extraProps = {};
+  // Checks if the input field is for an image and sets any extra props required to handle upload
+  if (isImage) {
+    extraProps.accept = ".jpg, .gif, .png";
+    extraProps.file = file;
+  } else {
+    extraProps.value = value || "";
+  }
+
   return (
     <div className="flex flex-col space-y-6 font-oswald text-xl">
       <label htmlFor={`${label}`}>{label} </label>
       <input
         type={type || "text"}
         name={label}
-        value={value || ""}
         onChange={onChange}
-        className="border border-slate-300 rounded text-xl font-light p-2"
+        className="rounded border border-slate-300 p-2 text-xl font-light"
+        {...extraProps}
+        required
       />
     </div>
   );

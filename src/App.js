@@ -5,18 +5,19 @@ import ReactHome from "./pages/ReactHome";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Alerts from "./components/Alerts";
 import GlobalContexts from "./components/GlobalContexts";
-import Catalogue from "./pages/Catalogue";
+import AdminDashboard from "./pages/AdminDashboard";
+
+// import Catalogue from "./pages/Catalogue";
 
 function App() {
-
   return (
     <GlobalContexts>
       <BrowserRouter>
         <Navbar />
         <Alerts />
         <Routes>
-          <Route path="/" element={<Catalogue />} />
-          <Route path="/admin" element={<ReactHome />} />
+          <Route path="/" element={<ReactHome />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/bag" element={<ReactHome />} />
         </Routes>
       </BrowserRouter>

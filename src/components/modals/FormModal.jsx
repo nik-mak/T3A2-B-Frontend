@@ -50,7 +50,6 @@ function FormModal({
     if (formData.some((element) => element.type === "file")) {
       newFormData = new FormData();
       formData.map((element) => {
-        console.log(element);
         if (element.type === "file") {
           return newFormData.append(element.name, element.file);
         }

@@ -28,6 +28,7 @@ function GlobalContexts({ children }) {
     return <>Loading...</>
   }
 
+    
   return (
     <UserContext.Provider value={[user, setUser]}>
       <AlertsContext.Provider value={[alerts, setAlerts]}>

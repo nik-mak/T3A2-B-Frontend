@@ -38,9 +38,7 @@ function AddListingModal({ open, onClose }) {
       .catch(() => {
         addAlert({ severity: "warning", message: "Successfully ERRORED" });
       })
-      .finally(() => {
-        onClose();
-      });
+    onClose();
   }
 
   const props = {

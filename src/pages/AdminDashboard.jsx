@@ -4,10 +4,19 @@ import AddStaffModal from "../components/modals/AddStaffModal";
 import api from "../helpers/api";
 import useModalsReducer from "../hooks/reducers/ModalsReducer";
 
+/**
+ * Admin Dashboard page used to render the admin dashboard
+ *
+ * @returns {HTML} the admin dashboard
+ */
 const AdminDashboard = () => {
   const [staff, setStaff] = useState([]);
+
+  // Initial state for the addStaff Modal
   const initialState = { addStaff: false };
   const [modalStates, setModalStates] = useModalsReducer(initialState);
+
+  // Fetch all staff and admin accounts from the db
   useEffect(() => {
     api
       .get("/admin/all/staff")

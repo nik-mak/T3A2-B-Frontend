@@ -7,9 +7,11 @@ import Alerts from "./components/Alerts";
 import GlobalContexts from "./components/GlobalContexts";
 import Catalogue from "./pages/Catalogue";
 import Bag from "./pages/Bag";
+import AdminDashboard from "./pages/AdminDashboard";
+
+// import Catalogue from "./pages/Catalogue";
 
 function App() {
-
   return (
     <GlobalContexts>
       <BrowserRouter>
@@ -17,7 +19,7 @@ function App() {
         <Alerts />
         <Routes>
           <Route path="/" element={<Catalogue />} />
-          <Route path="/admin" element={<ReactHome />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/bag" element={<Bag />} />
         </Routes>
       </BrowserRouter>

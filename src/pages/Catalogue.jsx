@@ -24,7 +24,7 @@ function Catalogue() {
     api
       .post("/catalogue", {
         page: page,
-        amount: 20,
+        amount: 2,
         sort: selected,
         filter: "available",
       })

@@ -33,7 +33,7 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
     <div className="m-4 flex flex-col space-y-4 bg-white p-2 font-oswald text-lg shadow-custom">
       <h2>{heading}</h2>
       {/* <BlankImageIcon /> */}
-      <img src={imageURL} className="aspect-square w-full object-cover" />
+      <img src={imageURL} alt={heading} className="aspect-square w-full object-cover" />
       <div className="flex justify-evenly">
         <h3>Size: {size}</h3>
         <h3>

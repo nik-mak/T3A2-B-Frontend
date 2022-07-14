@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Alerts from "./components/Alerts";
 import GlobalContexts from "./components/GlobalContexts";
 import Catalogue from "./pages/Catalogue";
+import Bag from "./pages/Bag";
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Catalogue />} />
           <Route path="/admin" element={<ReactHome />} />
-          <Route path="/bag" element={<ReactHome />} />
+          <Route path="/bag" element={<Bag />} />
         </Routes>
       </BrowserRouter>
     </GlobalContexts>

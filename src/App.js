@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Alerts from "./components/Alerts";
 import GlobalContexts from "./components/GlobalContexts";
 import Catalogue from "./pages/Catalogue";
+import Cart from "./components/Cart/Cart";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Alerts />
+        <Cart />
         <Routes>
           <Route path="/" element={<Catalogue />} />
           <Route path="/admin" element={<ReactHome />} />

@@ -18,7 +18,8 @@ module.exports = {
       },
       boxShadow: {
         'custom': '2px 2px 2px 2px rgba(0, 0, 0, .1)',
-        'custom2': '0px 4px 4px rgba(0, 0, 0, .25)'
+        'custom2': '0px 4px 4px rgba(0, 0, 0, .25)',
+        'custom3': '2px -4px 4px rgba(0, 0, 0, .25)'
       },
     },
   },

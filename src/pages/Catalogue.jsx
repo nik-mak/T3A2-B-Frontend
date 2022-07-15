@@ -24,7 +24,7 @@ function Catalogue() {
     api
       .post("/catalogue", {
         page: page,
-        amount: 2,
+        amount: 20,
         sort: selected,
         filter: "available",
       })
@@ -61,6 +61,7 @@ function Catalogue() {
             onChange={handleSort}
             selected={selected}
             setSelected={setSelected}
+            label="Sort by: "
           />
           <section className="grid grid-flow-row auto-rows-max grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
             {listings.map((listing, index) => {

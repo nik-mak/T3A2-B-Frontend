@@ -53,14 +53,16 @@ function NavItemsWrapper() {
   return (
     <div className="flex space-x-5 pr-5 sm:space-x-10 sm:pr-10">
       {/* Create Listing Nav Item */}
-      <NavItem
-        onClick={() =>
-          setModalStates({ modalName: "addListing", action: "open" })
-        }
-        itemName="+Listing"
-      >
-        <AddListingIcon />
-      </NavItem>
+      <HasRole roles={["staff", "admin"]}>
+        <NavItem
+          onClick={() =>
+            setModalStates({ modalName: "addListing", action: "open" })
+          }
+          itemName="+Listing"
+        >
+          <AddListingIcon />
+        </NavItem>
+      </HasRole>
       {/* Sign Up Nav item */}
       <NotLoggedIn>
         <NavItem
@@ -86,7 +88,7 @@ function NavItemsWrapper() {
         </NavItem>
       </LoggedIn>
       {/* TODO: Finish implementing the settings menu nav item */}
-      <HasRole roles={["staff", "administrator"]}>
+      <HasRole roles={["staff", "admin"]}>
         <div className="relative flex">
           <NavItem
             itemName="Settings"
@@ -120,12 +122,12 @@ function NavItemsWrapper() {
           }
         />
       </NotLoggedIn>
-        <AddListingModal
+      <AddListingModal
         open={modalStates.addListing}
-        onClose={() => 
-          setModalStates({modalName:"addListing", action: "close"})
+        onClose={() =>
+          setModalStates({ modalName: "addListing", action: "close" })
         }
-        />
+      />
     </div>
   );
 }

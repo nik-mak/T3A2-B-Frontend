@@ -1,7 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import UserContext from "../contexts/user";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";
+import HasRole from "./Auth/HasRole";
+import NotLoggedIn from "./Auth/NotLoggedIn";
+import BinIcon from "./Icons/BinIcon";
 
 /**
  * ListingCard is a component that handles rendering a listing card to be displayed in the catalogue
@@ -17,7 +20,28 @@ import useAlerts from "../hooks/useAlerts";
 function ListingCard({ heading, size, price, imageURL, itemID }) {
   const user = useContext(UserContext)[0];
   const { addAlert } = useAlerts();
+  const [isRemoved, setIsRemoved] = useState(false);
 
+  /**
+   * A function that handles removing a listing item from the catalogue using the itemID
+   */
+  function removeHandler() {
+    api
+      .delete(`/items/${itemID}`)
+      .then((response) => {
+        addAlert({
+          severity: "success",
+          message: `Successfully removed item ${heading}`,
+        });
+        setIsRemoved(true);
+      })
+      .catch((response) => {
+        addAlert({
+          severity: "warning",
+          message: response.message,
+        });
+      });
+  }
   /**
    * A function that handles adding a listing item to a users cart using the itemID
    */
@@ -37,14 +61,32 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
             message: "Please login to add this item to your cart",
           });
         } else {
-          addAlert({ severity: "warning", message: response.message });
+          console.log(response);
+          addAlert({
+            severity: "warning",
+            message: response.request.response,
+          });
         }
       });
   }
 
-  return (
+  return isRemoved ? (
+    <></>
+  ) : (
     <div className="m-4 flex flex-col space-y-4 bg-white p-2 font-oswald text-lg shadow-custom">
-      <h2>{heading}</h2>
+      <div className="flex flex-row items-center justify-between">
+        <h2 className="mr-2">{heading}</h2>
+        {/* Displays remove listing if user is staff or admin */}
+        <HasRole roles={["admin", "staff"]}>
+          <button
+            className="mr-2 flex w-[20px] flex-col items-center self-center hover:text-ue-red"
+            onClick={removeHandler}
+          >
+            <BinIcon></BinIcon>
+            <p className="font-oswald text-base">remove</p>
+          </button>
+        </HasRole>
+      </div>
       {/* <BlankImageIcon /> */}
       <img
         src={imageURL}
@@ -58,12 +100,33 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
           {price}
         </h3>
       </div>
-      <button
-        className="w-1/2 self-center rounded-full border border-slate-300 bg-ghost-white py-2 hover:bg-slate-100"
-        onClick={addToCartHandler}
-      >
-        + Add to cart
-      </button>
+      {/* Displays add to cart button if user is customer */}
+      <HasRole roles={["customer"]}>
+        <button
+          className="w-1/2 self-center rounded-full border border-slate-300 bg-ghost-white py-2 hover:bg-slate-100"
+          onClick={addToCartHandler}
+        >
+          + Add to cart
+        </button>
+      </HasRole>
+      {/* Displays add to cart button if user is not logged in */}
+      <NotLoggedIn>
+        <button
+          className="w-1/2 self-center rounded-full border border-slate-300 bg-ghost-white py-2 hover:bg-slate-100"
+          onClick={addToCartHandler}
+        >
+          + Add to cart
+        </button>
+      </NotLoggedIn>
+      {/* displays manage listing button if user is staff or admin */}
+      <HasRole roles={["staff", "admin"]}>
+        <button
+          className="w-2/3 self-center rounded-full border border-slate-300 bg-ghost-white py-2 hover:bg-slate-100"
+          onClick={addToCartHandler}
+        >
+          Manage Listing
+        </button>
+      </HasRole>
     </div>
   );
 }

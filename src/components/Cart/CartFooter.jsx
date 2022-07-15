@@ -5,7 +5,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 const CartFooter = () => {
   return (
-    <div className="mb-2 flex w-full flex-col border-l-2 shadow-custom3">
+    <div className="flex w-full flex-col justify-end border-l-2 shadow-custom3">
       <div className="mb-2 mt-4 flex justify-center">
         <button className="flex h-[49px] w-[122px] flex-row items-center rounded-full border-2 border-ue-red text-[20px] text-ue-red hover:bg-ue-red hover:text-white">
           <div className="flex justify-center pl-1 pt-px">

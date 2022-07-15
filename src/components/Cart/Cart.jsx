@@ -62,12 +62,12 @@ const Cart = () => {
   ];
 
   return (
-    <div className="fixed right-0 z-50 m-0 flex h-[calc(100vh-96px)] max-h-[calc(100vh-96px)] max-w-sm flex-col items-center justify-between bg-white p-0 font-oswald after:right-0">
-      <div className="w-80 border-l-2">
+    <div className="fixed right-0 z-50 m-0 flex sm:h-[calc(100vh-96px)] h-[calc(100vh-80px)] justify-between flex-col items-center bg-white p-0 font-oswald">
+      <div className="w-screen sm:w-80 border-l-2">
         <CartHeader />
         <CartContent cartItems={cartItems} />
       </div>
-      <CartFooter />
+        <CartFooter />
     </div>
   );
 };

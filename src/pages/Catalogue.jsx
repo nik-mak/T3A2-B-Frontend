@@ -18,7 +18,7 @@ function Catalogue() {
   const [listings, setListings] = useState([]);
   const [page, setPage] = useState(1);
   const { addAlert } = useAlerts();
-  const [pageCount, setPageCount] = useState(1)
+  const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
     api
@@ -29,17 +29,17 @@ function Catalogue() {
         filter: "available",
       })
       .then((response) => {
-        console.log(response.data)
         setListings(response.data.results);
-        setPageCount(response.data.totalPages)
+        setPageCount(response.data.totalPages);
       })
-      .catch(() => {
-        addAlert({ severity: "warning", message: "Problem trying to sort" });
+      .catch((response) => {
+        addAlert({ severity: "warning", message: response.data });
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, selected]);
 
   /**
-   * Sort handler used to update the catalogue listings when there is a change in the value of the Sort By Button
+   * Sort handler used to update the catalogue listings when there is a change in the value of the Sort By button
    *
    * @param {String} value a string containing the data needed by the backend to organize/filter the catalogue listings
    */
@@ -47,6 +47,11 @@ function Catalogue() {
     setSelected(value);
   }
 
+  /**
+   * Pagination Handler used to update the catalogue listings when there is a change in the value of the pagination button
+   *
+   * @param {String} value a string containing the data needed by the backend to organize/filter the catalogue listings
+   */
   function handlePagination(e, value) {
     setPage(value);
   }

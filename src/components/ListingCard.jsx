@@ -18,7 +18,7 @@ import BinIcon from "./Icons/BinIcon";
  * @return {HTML} a listing card
  */
 function ListingCard({ heading, size, price, imageURL, itemID }) {
-  const user = useContext(UserContext)[0];
+  const {user} = useContext(UserContext);
   const { addAlert } = useAlerts();
   const [isRemoved, setIsRemoved] = useState(false);
 
@@ -28,7 +28,7 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
   function removeHandler() {
     api
       .delete(`/items/${itemID}`)
-      .then((response) => {
+      .then(() => {
         addAlert({
           severity: "success",
           message: `Successfully removed item ${heading}`,

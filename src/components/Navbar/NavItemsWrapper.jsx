@@ -5,6 +5,8 @@ import SignUpModal from "../modals/SignUpModal";
 import NavItem from "./NavItem";
 import AccountIcon from "../Icons/AccountIcon";
 import LoginIcon from "../Icons/LoginIcon";
+import BagIcon from "../Icons/BagIcon";
+import CartIcon from "../Icons/CartIcon";
 import { useState } from "react";
 import useModalsReducer from "../../hooks/reducers/ModalsReducer";
 import LogoutIcon from "../Icons/LogoutIcon";
@@ -16,6 +18,7 @@ import LoggedIn from "../Auth/LoggedIn";
 import NotLoggedIn from "../Auth/NotLoggedIn";
 import AddListingIcon from "../Icons/AddListingIcon";
 import AddListingModal from "../modals/AddListingModal";
+import { useNavigate } from "react-router-dom";
 
 // Defines the modals used in the Navbar
 const initialState = { signUp: false, login: false, addListing: false };
@@ -23,7 +26,7 @@ const initialState = { signUp: false, login: false, addListing: false };
 /**
  * Nav Item wrapper that contains nav items and relevant modals
  *
- * @returns {HTML} wrapped nav items and relevant modals
+ * @returns {Object} wrapped nav items and relevant modals
  */
 function NavItemsWrapper() {
   //  defines the states of every modal and a dispatch method
@@ -33,6 +36,13 @@ function NavItemsWrapper() {
   const setUser = useContext(UserContext)[1];
   // defines the alerts dispatch method
   const { addAlert } = useAlerts();
+
+  const navigate = useNavigate();
+
+  const navigateToBag = () => {
+    // 👇️ navigate to /bag
+    navigate("/bag");
+  };
 
   // A function to handle the onclick logout action for the logout nav item.
   function handleLogout() {
@@ -52,6 +62,12 @@ function NavItemsWrapper() {
 
   return (
     <div className="flex space-x-5 pr-5 sm:space-x-10 sm:pr-10">
+      {/* Bag Nav Item for Customers */}
+      <HasRole roles={["customer"]}>
+        <NavItem onClick={navigateToBag} itemName="Bag">
+          <BagIcon />
+        </NavItem>
+      </HasRole>
       {/* Create Listing Nav Item */}
       <HasRole roles={["staff", "admin"]}>
         <NavItem
@@ -83,6 +99,9 @@ function NavItemsWrapper() {
       </NotLoggedIn>
       {/* Logout Nav Item */}
       <LoggedIn>
+        <NavItem itemName="Cart">
+          <CartIcon />
+        </NavItem>
         <NavItem onClick={() => handleLogout()} itemName="Logout">
           <LogoutIcon />
         </NavItem>

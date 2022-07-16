@@ -19,6 +19,11 @@ import NotLoggedIn from "../Auth/NotLoggedIn";
 import AddListingIcon from "../Icons/AddListingIcon";
 import AddListingModal from "../modals/AddListingModal";
 import { useNavigate } from "react-router-dom";
+import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemText from "@mui/material/ListItemText";
 
 // Defines the modals used in the Navbar
 const initialState = { signUp: false, login: false, addListing: false };
@@ -36,12 +41,21 @@ function NavItemsWrapper() {
   const setUser = useContext(UserContext)[1];
   // defines the alerts dispatch method
   const { addAlert } = useAlerts();
-
+  
   const navigate = useNavigate();
 
+  // navigate to bag handler
   const navigateToBag = () => {
-    // 👇️ navigate to /bag
     navigate("/bag");
+  };
+  // navigate to home handler
+  const navigateToHome = () => {
+    navigate("/");
+  };
+
+  // navigate to admin handler
+  const navigateToAdmin = () => {
+    navigate("/admin");
   };
 
   // A function to handle the onclick logout action for the logout nav item.
@@ -69,16 +83,7 @@ function NavItemsWrapper() {
         </NavItem>
       </HasRole>
       {/* Create Listing Nav Item */}
-      <HasRole roles={["staff", "admin"]}>
-        <NavItem
-          onClick={() =>
-            setModalStates({ modalName: "addListing", action: "open" })
-          }
-          itemName="+Listing"
-        >
-          <AddListingIcon />
-        </NavItem>
-      </HasRole>
+      <HasRole roles={["staff", "admin"]}></HasRole>
       {/* Sign Up Nav item */}
       <NotLoggedIn>
         <NavItem
@@ -97,34 +102,57 @@ function NavItemsWrapper() {
           <LoginIcon />
         </NavItem>
       </NotLoggedIn>
-      {/* Logout Nav Item */}
-      <LoggedIn>
-        <NavItem itemName="Cart">
-          <CartIcon />
-        </NavItem>
-        <NavItem onClick={() => handleLogout()} itemName="Logout">
-          <LogoutIcon />
-        </NavItem>
-      </LoggedIn>
-      {/* TODO: Finish implementing the settings menu nav item */}
+      {/* Settings Menu */}
       <HasRole roles={["staff", "admin"]}>
         <div className="relative flex">
           <NavItem
-            itemName="Settings"
+            itemName={settingsState ? "Settings ⇣" : "Settings ⇡"}
             onClick={() => setSettingsState(!settingsState)}
           >
             <SettingsIcon />
           </NavItem>
-          <ul
-            className={`absolute top-[100px] bg-white ${
-              settingsState ? "" : "hidden"
-            }`}
-          >
-            <li>test1</li>
-            <li>test2</li>
-            <li>test3</li>
-          </ul>
+          {settingsState ? (
+            ""
+          ) : (
+            <Paper className={"absolute top-[80px] sm:top-[97px]"}>
+              <MenuList dense>
+                <MenuItem onClick={navigateToHome}>
+                  <ListItemText>Manage Listings</ListItemText>
+                </MenuItem>
+                <HasRole roles={["admin"]}>
+                  <Divider />
+                  <MenuItem onClick={navigateToAdmin}>
+                    <ListItemText>Admin Dashboard</ListItemText>
+                  </MenuItem>
+                </HasRole>
+                <Divider />
+                <MenuItem onClick={navigateToBag}>
+                  <ListItemText>Listings on hold</ListItemText>
+                </MenuItem>
+              </MenuList>
+            </Paper>
+          )}
         </div>
+        {/* Create Listing Nav Item */}
+        <NavItem
+          onClick={() =>
+            setModalStates({ modalName: "addListing", action: "open" })
+          }
+          itemName="+Listing"
+        >
+          <AddListingIcon />
+        </NavItem>
+      </HasRole>
+      {/* Logout Nav Item */}
+      <LoggedIn>
+        <NavItem onClick={() => handleLogout()} itemName="Logout">
+          <LogoutIcon />
+        </NavItem>
+      </LoggedIn>
+      <HasRole roles={["customer"]}>
+        <NavItem itemName="Cart">
+          <CartIcon />
+        </NavItem>
       </HasRole>
       {/* Modals */}
       <NotLoggedIn>

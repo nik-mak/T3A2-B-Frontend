@@ -16,6 +16,7 @@ import LoggedIn from "../Auth/LoggedIn";
 import NotLoggedIn from "../Auth/NotLoggedIn";
 import AddListingIcon from "../Icons/AddListingIcon";
 import AddListingModal from "../modals/AddListingModal";
+import CartContext from "../../contexts/cart";
 
 // Defines the modals used in the Navbar
 const initialState = { signUp: false, login: false, addListing: false };
@@ -33,6 +34,8 @@ function NavItemsWrapper() {
   const setUser = useContext(UserContext)[1];
   // defines the alerts dispatch method
   const { addAlert } = useAlerts();
+  
+  const setCartItems = useContext(CartContext)[1]
 
   // A function to handle the onclick logout action for the logout nav item.
   function handleLogout() {
@@ -42,6 +45,7 @@ function NavItemsWrapper() {
         setUser(undefined);
         addAlert({ severity: "success", message: "Successfully Logged Out" });
       })
+      .then(setCartItems([]))
       .catch(() => {
         addAlert({
           severity: "warning",

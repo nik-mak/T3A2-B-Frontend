@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import CartContext from "../contexts/cart";
 import UserContext from "../contexts/user";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";
@@ -16,10 +17,9 @@ import useAlerts from "../hooks/useAlerts";
  */
 function ListingCard({ heading, size, price, imageURL, itemID }) {
   const user = useContext(UserContext)[0];
+  const cartItems = useContext(CartContext)[0]
+  const setCartItems = useContext(CartContext)[1]
   const { addAlert } = useAlerts();
-
-  const { cart } = React.useContext(UserContext);
-  const [setCartItems] = cart;
 
   /**
    * A function that handles adding a listing item to a users cart using the itemID
@@ -27,15 +27,17 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
   function addToCartHandler() {
     api
       .put(`/cart/${itemID}`, itemID)
+      .then((res) => {
+        setCartItems([
+          ...cartItems,
+          res.data
+        ])
+      })
       .then((response) => {
         addAlert({
           severity: "success",
           message: response.data,
         })
-          .then(api.get("/cart"))
-          .then(({ data }) => {
-            setCartItems(data);
-          });
       })
       .catch((response) => {
         if (user === undefined) {
@@ -52,7 +54,6 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
   return (
     <div className="m-4 flex flex-col space-y-4 bg-white p-2 font-oswald text-lg shadow-custom">
       <h2>{heading}</h2>
-      {/* <BlankImageIcon /> */}
       <img
         src={imageURL}
         alt={heading}

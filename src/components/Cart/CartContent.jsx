@@ -1,10 +1,9 @@
-import React from "react";
-import UserContext from "../../contexts/user";
+import React, { useContext } from "react";
+import CartContext from "../../contexts/cart";
 import CartCard from "../CartCard";
 
 const CartContent = () => {
-  const { cart } = React.useContext(UserContext);
-  const [cartItems] = cart;
+  const cartItems = useContext(CartContext)[0];
 
   return (
     <>
@@ -18,13 +17,14 @@ const CartContent = () => {
                   image={item.image}
                   price={item.price}
                   size={item.size}
+                  id={item._id}
                 />
               </div>
             );
           })}
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>Cart is empty</p>
       )}
     </>
   );

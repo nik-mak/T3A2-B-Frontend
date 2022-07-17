@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AlertsContext from "../contexts/alert";
+import CartContext from "../contexts/cart";
 import UserContext from "../contexts/user";
 import api from "../helpers/api";
 
@@ -30,7 +31,7 @@ function GlobalContexts({ children }) {
     api
       .get("/cart")
       .then(({ data }) => {
-        console.dir(data)
+        console.dir(data);
         setCartItems(data);
       })
       .catch();
@@ -41,10 +42,12 @@ function GlobalContexts({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ user: [user, setUser], cart: [cartItems, setCartItems]}}>
-      <AlertsContext.Provider value={[alerts, setAlerts]}>
-        {children}
-      </AlertsContext.Provider>
+    <UserContext.Provider value={[user, setUser]}>
+      <CartContext.Provider value={[cartItems, setCartItems]}>
+        <AlertsContext.Provider value={[alerts, setAlerts]}>
+          {children}
+        </AlertsContext.Provider>
+      </CartContext.Provider>
     </UserContext.Provider>
   );
 }

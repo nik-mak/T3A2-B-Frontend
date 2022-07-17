@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import api from "../../helpers/api";
+import CartContext from "../../contexts/cart";
 
 const CartFooter = () => {
+  const setCartItems = useContext(CartContext)[1];
+
+  const emptyCart = () => {
+    api.delete("/cart").then(() => {
+      setCartItems([]);
+    });
+  };
+
   return (
     <div className="flex w-full flex-col justify-end border-l-2 shadow-custom3">
-      <div className="mb-2 mt-4 flex justify-center">
+      <div className="mb-2 mt-4 flex justify-center" onClick={emptyCart}>
         <button className="flex h-[49px] w-[122px] flex-row items-center rounded-full border-2 border-ue-red text-[20px] text-ue-red hover:bg-ue-red hover:text-white">
           <div className="flex justify-center pl-1 pt-px">
             <DeleteOutlineIcon />

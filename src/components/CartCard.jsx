@@ -1,7 +1,6 @@
 import React from "react";
 import DollarSignIcon from "./Icons/DollarSignIcon";
 
-
 /**
  * CartCard is a component that handles rendering a listing card styled like a cart item
  *
@@ -9,7 +8,7 @@ import DollarSignIcon from "./Icons/DollarSignIcon";
  */
 function CartCard({ name, image, price, size }) {
   return (
-    <div className="flex w-[300px] flex-row shadow-custom">
+    <div className="flex min-w-[300px] flex-row shadow-custom">
       <div className="mr-2 h-24 w-20 flex-shrink-0 overflow-hidden border border-gray-200">
         <img
           src={image}

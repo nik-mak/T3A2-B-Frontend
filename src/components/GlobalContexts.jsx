@@ -13,24 +13,35 @@ function GlobalContexts({ children }) {
   const [user, setUser] = useState();
   const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [cartItems, setCartItems] = useState();
 
   useEffect(() => {
-    api.get("/user/loggedin")
-    .then(({ data }) => {
-      setUser(data);
-    })
-    .catch(() => {})
-    .finally(() => setLoading(false))
+    api
+      .get("/user/loggedin")
+      .then(({ data }) => {
+        setUser(data);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if(loading){
-    return <>Loading...</>
+  useEffect(() => {
+    api
+      .get("/cart")
+      .then(({ data }) => {
+        console.dir(data)
+        setCartItems(data);
+      })
+      .catch();
+  }, []);
+
+  if (loading) {
+    return <>Loading...</>;
   }
 
-    
   return (
-    <UserContext.Provider value={[user, setUser]}>
+    <UserContext.Provider value={{ user: [user, setUser], cart: [cartItems, setCartItems]}}>
       <AlertsContext.Provider value={[alerts, setAlerts]}>
         {children}
       </AlertsContext.Provider>

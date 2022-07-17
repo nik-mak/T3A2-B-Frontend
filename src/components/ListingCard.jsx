@@ -18,6 +18,9 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
   const user = useContext(UserContext)[0];
   const { addAlert } = useAlerts();
 
+  const { cart } = React.useContext(UserContext);
+  const [setCartItems] = cart;
+
   /**
    * A function that handles adding a listing item to a users cart using the itemID
    */
@@ -28,7 +31,11 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
         addAlert({
           severity: "success",
           message: response.data,
-        });
+        })
+          .then(api.get("/cart"))
+          .then(({ data }) => {
+            setCartItems(data);
+          });
       })
       .catch((response) => {
         if (user === undefined) {

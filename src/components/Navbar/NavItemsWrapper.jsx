@@ -1,14 +1,11 @@
 import React, { useContext } from "react";
 import SettingsIcon from "../Icons/SettingsIcon";
-import LoginModal from "../modals/LoginModal";
-import SignUpModal from "../modals/SignUpModal";
 import NavItem from "./NavItem";
 import AccountIcon from "../Icons/AccountIcon";
 import LoginIcon from "../Icons/LoginIcon";
 import BagIcon from "../Icons/BagIcon";
 import CartIcon from "../Icons/CartIcon";
 import { useState } from "react";
-import useModalsReducer from "../../hooks/reducers/ModalsReducer";
 import LogoutIcon from "../Icons/LogoutIcon";
 import api from "../../helpers/api";
 import UserContext from "../../contexts/user";
@@ -17,16 +14,13 @@ import HasRole from "../Auth/HasRole";
 import LoggedIn from "../Auth/LoggedIn";
 import NotLoggedIn from "../Auth/NotLoggedIn";
 import AddListingIcon from "../Icons/AddListingIcon";
-import AddListingModal from "../modals/AddListingModal";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
-
-// Defines the modals used in the Navbar
-const initialState = { signUp: false, login: false, addListing: false };
+import ModalsContext from "../../contexts/modals";
 
 /**
  * Nav Item wrapper that contains nav items and relevant modals
@@ -34,14 +28,15 @@ const initialState = { signUp: false, login: false, addListing: false };
  * @returns {Object} wrapped nav items and relevant modals
  */
 function NavItemsWrapper() {
-  //  defines the states of every modal and a dispatch method
-  const [modalStates, setModalStates] = useModalsReducer(initialState);
+  // defines modalStates and setModalStates using context provider
+  const setModalStates = useContext(ModalsContext)[1];
+  // defines the open close state for the settings drop down
   const [settingsState, setSettingsState] = useState(false);
   // defines the states of the user and a dispatch method
   const setUser = useContext(UserContext)[1];
   // defines the alerts dispatch method
   const { addAlert } = useAlerts();
-  
+
   const navigate = useNavigate();
 
   // navigate to bag handler
@@ -82,8 +77,6 @@ function NavItemsWrapper() {
           <BagIcon />
         </NavItem>
       </HasRole>
-      {/* Create Listing Nav Item */}
-      <HasRole roles={["staff", "admin"]}></HasRole>
       {/* Sign Up Nav item */}
       <NotLoggedIn>
         <NavItem
@@ -102,8 +95,8 @@ function NavItemsWrapper() {
           <LoginIcon />
         </NavItem>
       </NotLoggedIn>
-      {/* Settings Menu */}
       <HasRole roles={["staff", "admin"]}>
+      {/* Settings Menu */}
         <div className="relative flex">
           <NavItem
             itemName={settingsState ? "Settings ⇣" : "Settings ⇡"}
@@ -111,7 +104,7 @@ function NavItemsWrapper() {
           >
             <SettingsIcon />
           </NavItem>
-          {settingsState ? (
+          {!settingsState ? (
             ""
           ) : (
             <Paper className={"absolute top-[80px] sm:top-[97px]"}>
@@ -138,7 +131,7 @@ function NavItemsWrapper() {
           onClick={() =>
             setModalStates({ modalName: "addListing", action: "open" })
           }
-          itemName="+Listing"
+          itemName="+ Listing"
         >
           <AddListingIcon />
         </NavItem>
@@ -154,27 +147,6 @@ function NavItemsWrapper() {
           <CartIcon />
         </NavItem>
       </HasRole>
-      {/* Modals */}
-      <NotLoggedIn>
-        <SignUpModal
-          open={modalStates.signUp}
-          onClose={() =>
-            setModalStates({ modalName: "signUp", action: "close" })
-          }
-        />
-        <LoginModal
-          open={modalStates.login}
-          onClose={() =>
-            setModalStates({ modalName: "login", action: "close" })
-          }
-        />
-      </NotLoggedIn>
-      <AddListingModal
-        open={modalStates.addListing}
-        onClose={() =>
-          setModalStates({ modalName: "addListing", action: "close" })
-        }
-      />
     </div>
   );
 }

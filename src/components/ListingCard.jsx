@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import ModalsContext from "../contexts/modals";
+import SelectedListingContext from "../contexts/selecteListing";
 import UserContext from "../contexts/user";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";
@@ -18,9 +20,12 @@ import BinIcon from "./Icons/BinIcon";
  * @return {HTML} a listing card
  */
 function ListingCard({ heading, size, price, imageURL, itemID }) {
-  const {user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const { addAlert } = useAlerts();
   const [isRemoved, setIsRemoved] = useState(false);
+  // defines modalStates and setModalStates using context provider
+  const setModalStates = useContext(ModalsContext)[1];
+  const setSelectedListing = useContext(SelectedListingContext)[1];
 
   /**
    * A function that handles removing a listing item from the catalogue using the itemID
@@ -122,7 +127,15 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
       <HasRole roles={["staff", "admin"]}>
         <button
           className="w-2/3 self-center rounded-full border border-slate-300 bg-ghost-white py-2 hover:bg-slate-100"
-          onClick={addToCartHandler}
+          onClick={() => {
+            setSelectedListing({
+              name: heading,
+              size,
+              price,
+              itemID,
+            });
+            setModalStates({ modalName: "manageListing", action: "open" });
+          }}
         >
           Manage Listing
         </button>

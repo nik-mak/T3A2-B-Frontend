@@ -6,6 +6,8 @@ import HeroBanner from "../components/HeroBanner";
 import SortByButton from "../components/SortByButton";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";
+import ManageListingModal from "../components/modals/ManageListingModal";
+import useModalsReducer from "../hooks/reducers/ModalsReducer";
 
 /**
  * Catalogue page component used to render the catalogue page.
@@ -19,6 +21,9 @@ function Catalogue() {
   const [page, setPage] = useState(1);
   const { addAlert } = useAlerts();
   const [pageCount, setPageCount] = useState(1);
+  const [modalStates, setModalStates] = useModalsReducer({
+    manageListing: false,
+  });
 
   useEffect(() => {
     api
@@ -91,6 +96,12 @@ function Catalogue() {
           onChange={handlePagination}
         />
       </div>
+      <ManageListingModal
+        open={modalStates.manageListing}
+        onClose={() =>
+          setModalStates({ modalName: "manageListing", action: "close" })
+        }
+      />
     </>
   );
 }

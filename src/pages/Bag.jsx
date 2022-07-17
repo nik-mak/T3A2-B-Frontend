@@ -45,6 +45,7 @@ function Bag() {
       .catch(() => {
         addAlert({ severity: "warning", message: "Something went wrong" });
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, filter, selectedSort]);
 
   function handleFilter(value) {

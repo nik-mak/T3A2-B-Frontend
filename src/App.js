@@ -8,12 +8,14 @@ import Catalogue from "./pages/Catalogue";
 import Bag from "./pages/Bag";
 import AdminDashboard from "./pages/AdminDashboard";
 import PrivateRoute from "./components/Auth/PrivateRoute";
+import ActiveModals from "./components/modals/ActiveModals";
 
 function App() {
   return (
     <GlobalContexts>
       <BrowserRouter>
         <Navbar />
+        <ActiveModals/>
         <Alerts />
         <Routes>
           <Route path="/" element={<Catalogue />} />

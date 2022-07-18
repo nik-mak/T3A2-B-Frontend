@@ -32,7 +32,7 @@ function OrderCard({ index, date, shopperName, items, totalPrice, collected }) {
   }
 
   return (
-    <div className="m-3 flex flex-col space-y-2 pb-2 font-oswald text-xl font-light shadow-custom">
+    <div className="m-3 flex flex-col space-y-2 pb-2 font-oswald text-xl font-light p-1 shadow-custom1">
       <h2 className="self-center p-2 font-oswald text-xl font-normal">
         Order ID: <span className="text-lg">{index}</span>{" "}
       </h2>
@@ -72,7 +72,7 @@ function OrderCard({ index, date, shopperName, items, totalPrice, collected }) {
             Mark as Collected
           </button>
         </HasRole>
-      )} */}
+      )}
     </div>
   );
 }

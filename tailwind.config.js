@@ -17,9 +17,8 @@ module.exports = {
         tall: { raw: "(max-height:700px)" },
       },
       boxShadow: {
-        'custom': '2px 2px 2px 2px rgba(0, 0, 0, .1)',
-        'custom2': '0px 4px 4px rgba(0, 0, 0, .25)',
-        'custom3': '2px -4px 4px rgba(0, 0, 0, .25)'
+        'custom1': '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
+        'custom2': "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
       },
     },
   },

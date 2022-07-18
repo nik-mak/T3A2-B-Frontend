@@ -49,7 +49,7 @@ const CartFooter = () => {
   };
 
   return (
-    <div className="flex w-full flex-col justify-end border-l-2 shadow-custom3">
+    <div className="flex w-full flex-col justify-end ml-1 z-[99]">
       <div className="mb-2 mt-4 flex justify-center" onClick={emptyCart}>
         <button className="flex h-[49px] w-[122px] flex-row items-center rounded-full border-2 border-ue-red text-[20px] text-ue-red hover:bg-ue-red hover:text-white">
           <div className="flex justify-center pl-1 pt-px">
@@ -59,10 +59,11 @@ const CartFooter = () => {
         </button>
       </div>
       <div>
+        <hr></hr>
         <div className="flex justify-center">
-          <p className="text-xl">Order Summary</p>
+          <p className="text-xl pb-2">Order Summary</p>
         </div>
-        <div className="mt-4 flex flex-row justify-between">
+        <div className="flex flex-row justify-between">
           <div className="pl-4">
             <p className="text-xl">Total</p>
             <div className="flex flex-row items-center">
@@ -72,7 +73,7 @@ const CartFooter = () => {
           </div>
           <button
             onClick={order}
-            className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue text-[20px] text-white hover:bg-cyan-cobalt-blue"
+            className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue text-[20px] pl-3 text-white hover:bg-cyan-cobalt-blue"
           >
             Purchase
             <NavigateNextIcon />

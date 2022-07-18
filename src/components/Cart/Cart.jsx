@@ -10,12 +10,12 @@ import CartFooter from "./CartFooter";
  */
 const Cart = () => {
   return (
-    <div className="fixed right-0 top-[79px] z-50 m-0 flex h-[calc(100vh-78px)] flex-col items-center justify-between bg-white p-0 font-oswald sm:top-[96px] sm:h-[calc(100vh-96px)]">
-      <div className="w-screen border-l-2 sm:w-80">
+    <div className="fixed right-0 top-[79px] z-[98] m-0 flex h-[calc(100vh-78px)] flex-col items-center justify-between bg-white font-oswald sm:top-[96px] sm:h-[calc(100vh-96px)]">
+      <div className="w-screen sm:w-80 mr-3 border border-t-2">
         <CartHeader />
         <CartContent />
+        <CartFooter />
       </div>
-      <CartFooter />
     </div>
   );
 };

@@ -16,7 +16,7 @@ const CartContent = () => {
         <div className="h-[calc(100vh-355px)] overflow-auto pt-2 md:h-[calc(100vh-371px)]">
           {cartItems.map((item) => {
             return (
-              <div key={item._id} className="ml-2 mb-2 font-light">
+              <div key={item._id} className="ml-2 mb-2 font-light shadow-custom2">
                 <CartCard
                   name={item.name}
                   image={item.image}

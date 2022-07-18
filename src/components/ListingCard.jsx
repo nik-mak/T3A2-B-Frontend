@@ -89,7 +89,7 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
   return isRemoved ? (
     <></>
   ) : (
-    <div className="m-4 flex flex-col space-y-4 bg-white p-2 font-oswald text-lg shadow-custom">
+    <div className="m-4 flex flex-col space-y-4 bg-white p-2 font-oswald text-lg shadow-custom2">
       <div className="flex flex-row items-center justify-between">
         <h2 className="mr-2">{heading}</h2>
         {/* Displays remove listing if user is staff or admin */}

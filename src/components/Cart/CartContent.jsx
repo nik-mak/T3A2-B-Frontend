@@ -2,6 +2,11 @@ import React, { useContext } from "react";
 import CartContext from "../../contexts/cart";
 import CartCard from "../CartCard";
 
+/**
+ * Cart Content component used to render all the items that are present in the users cart.
+ *
+ * @returns {HTML} container for the cart cards which list the items in the users cart.
+ */
 const CartContent = () => {
   const cartItems = useContext(CartContext)[0];
 

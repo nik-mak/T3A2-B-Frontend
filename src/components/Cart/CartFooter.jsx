@@ -5,22 +5,47 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import api from "../../helpers/api";
 import CartContext from "../../contexts/cart";
 import CartTotalContext from "../../contexts/total";
+import useAlerts from "../../hooks/useAlerts";
 
+/**
+ * Cart Footer component that renders the total amount of all items in the cart, purchase button, and empty cart button.
+ *
+ * @returns {HTML} collection of some of the cart buttons and total price.
+ */
 const CartFooter = () => {
+  const { addAlert } = useAlerts();
   const setCartItems = useContext(CartContext)[1];
   const cartTotal = useContext(CartTotalContext)[0];
   const setCartTotal = useContext(CartTotalContext)[1];
 
   const emptyCart = () => {
-    api.delete("/cart").then(() => {
-      setCartItems([]);
-    });
+    api
+      .delete("/cart")
+      .then(() => {
+        setCartItems([]);
+      })
+      .then(() => setCartTotal(0))
+      .catch(() => {
+        addAlert({
+          severity: "warning",
+          message: "An unexpected error occurred",
+        });
+      });
   };
 
+  // Checkout function to move items from cart to orders
+  // Marks items as sold
   const order = () => {
-    api.post("/order/add");
-    setCartItems([]);
-    setCartTotal(0);
+    api
+      .post("/order/add")
+      .then(() => setCartItems([]))
+      .then(() => setCartTotal(0))
+      .catch(() => {
+        addAlert({
+          severity: "warning",
+          message: "An unexpected error occurred",
+        });
+      });
   };
 
   return (

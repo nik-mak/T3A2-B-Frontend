@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import CartContext from "../contexts/cart";
+import CartTotalContext from "../contexts/total";
 import ModalsContext from "../contexts/modals";
 import SelectedListingContext from "../contexts/selecteListing";
 import UserContext from "../contexts/user";
@@ -21,6 +23,11 @@ import BinIcon from "./Icons/BinIcon";
  */
 function ListingCard({ heading, size, price, imageURL, itemID }) {
   const { user } = useContext(UserContext);
+  const cartItems = useContext(CartContext)[0];
+  const setCartItems = useContext(CartContext)[1];
+  const cartTotal = useContext(CartTotalContext)[0];
+  const setCartTotal = useContext(CartTotalContext)[1];
+
   const { addAlert } = useAlerts();
   const [isRemoved, setIsRemoved] = useState(false);
   // defines modalStates and setModalStates using context provider
@@ -53,6 +60,10 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
   function addToCartHandler() {
     api
       .put(`/cart/${itemID}`, itemID)
+      .then((res) => {
+        setCartItems([...cartItems, res.data]);
+        setCartTotal(cartTotal + res.data.price);
+      })
       .then((response) => {
         addAlert({
           severity: "success",

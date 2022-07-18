@@ -72,7 +72,7 @@ function OrderCard({ index, date, shopperName, items, totalPrice, collected }) {
             Mark as Collected
           </button>
         </HasRole>
-      )}
+      )} */}
     </div>
   );
 }

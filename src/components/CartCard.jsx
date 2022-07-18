@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import DollarSignIcon from "./Icons/DollarSignIcon";
-
+import CloseIcon from "@mui/icons-material/Close";
+import api from "../helpers/api";
+import CartContext from "../contexts/cart";
+import CartTotalContext from "../contexts/total";
 
 /**
  * CartCard is a component that handles rendering a listing card styled like a cart item
  *
  * @return {HTML} a styled card
  */
-function CartCard({ name, image, price, size }) {
+function CartCard({ name, image, price, size, id }) {
+  const setCartItems = useContext(CartContext)[1];
+  const cartTotal = useContext(CartTotalContext)[0];
+  const setCartTotal = useContext(CartTotalContext)[1];
+
+  const removeItem = () => {
+    api
+      .delete(`cart/${id}`)
+      .then(() => {
+        setCartItems((prevState) => {
+          setCartItems(prevState.filter((item) => item._id !== id));
+        });
+      })
+      .finally(() => setCartTotal(cartTotal - price));
+  };
+
   return (
-    <div className="flex w-[300px] flex-row shadow-custom">
+    <div className="flex min-w-[300px] flex-row shadow-custom">
       <div className="mr-2 h-24 w-20 flex-shrink-0 overflow-hidden border border-gray-200">
         <img
           src={image}
@@ -18,8 +36,14 @@ function CartCard({ name, image, price, size }) {
         />
       </div>
       <div className="flex w-full flex-col justify-between font-oswald">
-        <div className="text-xl">
+        <div className="flex justify-between text-xl">
           <p>{name}</p>
+          <button
+            onClick={removeItem}
+            className="mr-2 flex items-center hover:rounded-full hover:bg-ue-red hover:text-white"
+          >
+            <CloseIcon />
+          </button>
         </div>
         <div className="flex justify-between">
           <p className="text-lg">Size: {size}</p>

@@ -15,22 +15,30 @@ import useAlerts from "../../hooks/useAlerts";
 const CartHeader = () => {
   const { addAlert } = useAlerts();
   const setShowCart = useContext(ShowCartContext)[1];
+  const cartItems = useContext(CartContext)[0]
   const setCartItems = useContext(CartContext)[1];
   const setCartTotal = useContext(CartTotalContext)[1];
 
   // Checkout function to move items from cart to orders
   // Marks items as sold
   const order = () => {
-    api
-      .post("/order/add")
-      .then(() => setCartItems([]))
-      .then(() => setCartTotal(0))
-      .catch(() => {
-        addAlert({
-          severity: "warning",
-          message: "An unexpected error occurred",
+    if (cartItems.length > 0) {
+      api
+        .post("/order/add")
+        .then(() => setCartItems([]))
+        .then(() => setCartTotal(0))
+        .catch(() => {
+          addAlert({
+            severity: "warning",
+            message: "An unexpected error occurred",
+          });
         });
-      });
+    } else {
+      addAlert({
+        severity: "warning",
+        message: "Cart is empty"
+      })
+    }
   };
 
   return (

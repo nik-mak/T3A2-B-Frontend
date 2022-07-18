@@ -23,6 +23,8 @@ import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ModalsContext from "../../contexts/modals";
+import ShowCartContext from "../../contexts/showCart";
+import Cart from "../Cart/Cart";
 
 // Defines the modals used in the Navbar
 const initialState = { signUp: false, login: false, addListing: false };
@@ -44,7 +46,11 @@ function NavItemsWrapper() {
 
   const setCartItems = useContext(CartContext)[1];
   const setCartTotal = useContext(CartTotalContext)[1];
+
   const navigate = useNavigate();
+
+  const showCart = useContext(ShowCartContext)[0];
+  const setShowCart = useContext(ShowCartContext)[1];
 
   // navigate to bag handler
   const navigateToBag = () => {
@@ -76,6 +82,10 @@ function NavItemsWrapper() {
           message: "An unexpected error occurred",
         });
       });
+  }
+
+  function openCart() {
+    setShowCart((current) => !current);
   }
 
   return (
@@ -152,9 +162,10 @@ function NavItemsWrapper() {
         </NavItem>
       </LoggedIn>
       <HasRole roles={["customer"]}>
-        <NavItem itemName="Cart">
+        <NavItem onClick={openCart} itemName="Cart">
           <CartIcon />
         </NavItem>
+        {showCart && <Cart />}
       </HasRole>
     </div>
   );

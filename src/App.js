@@ -18,7 +18,6 @@ function App() {
         <Navbar />
         <ActiveModals/>
         <Alerts />
-        <Cart />
         <Routes>
           <Route path="/" element={<Catalogue />} />
           <Route path="/admin" element={<PrivateRoute roles={["admin","staff"]}><AdminDashboard /></PrivateRoute>} />

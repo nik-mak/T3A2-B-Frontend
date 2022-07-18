@@ -7,6 +7,7 @@ import SelectedListingContext from "../contexts/selecteListing";
 import UserContext from "../contexts/user";
 import api from "../helpers/api";
 import useModalsReducer from "../hooks/reducers/ModalsReducer";
+import ShowCartContext from "../contexts/showCart";
 
 //
 /**
@@ -27,6 +28,7 @@ function GlobalContexts({ children }) {
   const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState();
   const [cartTotal, setCartTotal] = useState(0);
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     api
@@ -63,15 +65,17 @@ function GlobalContexts({ children }) {
     <UserContext.Provider value={[user, setUser]}>
       <CartContext.Provider value={[cartItems, setCartItems]}>
         <CartTotalContext.Provider value={[cartTotal, setCartTotal]}>
-          <AlertsContext.Provider value={[alerts, setAlerts]}>
-            <ModalsContext.Provider value={[modalStates, setModalStates]}>
-              <SelectedListingContext.Provider
-                value={[selectedListing, setSelectedListing]}
-              >
-                {children}
-              </SelectedListingContext.Provider>
-            </ModalsContext.Provider>
-          </AlertsContext.Provider>
+          <ShowCartContext.Provider value={[showCart, setShowCart]}>
+            <AlertsContext.Provider value={[alerts, setAlerts]}>
+              <ModalsContext.Provider value={[modalStates, setModalStates]}>
+                <SelectedListingContext.Provider
+                  value={[selectedListing, setSelectedListing]}
+                >
+                  {children}
+                </SelectedListingContext.Provider>
+              </ModalsContext.Provider>
+            </AlertsContext.Provider>
+          </ShowCartContext.Provider>
         </CartTotalContext.Provider>
       </CartContext.Provider>
     </UserContext.Provider>

@@ -14,6 +14,8 @@ import HasRole from "../Auth/HasRole";
 import LoggedIn from "../Auth/LoggedIn";
 import NotLoggedIn from "../Auth/NotLoggedIn";
 import AddListingIcon from "../Icons/AddListingIcon";
+import CartContext from "../../contexts/cart";
+import CartTotalContext from "../../contexts/total";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
@@ -21,6 +23,11 @@ import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ModalsContext from "../../contexts/modals";
+import ShowCartContext from "../../contexts/showCart";
+import Cart from "../Cart/Cart";
+
+// Defines the modals used in the Navbar
+const initialState = { signUp: false, login: false, addListing: false };
 
 /**
  * Nav Item wrapper that contains nav items and relevant modals
@@ -37,7 +44,13 @@ function NavItemsWrapper() {
   // defines the alerts dispatch method
   const { addAlert } = useAlerts();
 
+  const setCartItems = useContext(CartContext)[1];
+  const setCartTotal = useContext(CartTotalContext)[1];
+
   const navigate = useNavigate();
+
+  const showCart = useContext(ShowCartContext)[0];
+  const setShowCart = useContext(ShowCartContext)[1];
 
   // navigate to bag handler
   const navigateToBag = () => {
@@ -61,12 +74,18 @@ function NavItemsWrapper() {
         setUser(undefined);
         addAlert({ severity: "success", message: "Successfully Logged Out" });
       })
+      .then(setCartItems([]))
+      .then(setCartTotal(0))
       .catch(() => {
         addAlert({
           severity: "warning",
           message: "An unexpected error occurred",
         });
       });
+  }
+
+  function openCart() {
+    setShowCart((current) => !current);
   }
 
   return (
@@ -96,7 +115,7 @@ function NavItemsWrapper() {
         </NavItem>
       </NotLoggedIn>
       <HasRole roles={["staff", "admin"]}>
-      {/* Settings Menu */}
+        {/* Settings Menu */}
         <div className="relative flex">
           <NavItem
             itemName={settingsState ? "Settings ⇣" : "Settings ⇡"}
@@ -143,9 +162,10 @@ function NavItemsWrapper() {
         </NavItem>
       </LoggedIn>
       <HasRole roles={["customer"]}>
-        <NavItem itemName="Cart">
+        <NavItem onClick={openCart} itemName="Cart">
           <CartIcon />
         </NavItem>
+        {showCart && <Cart />}
       </HasRole>
     </div>
   );

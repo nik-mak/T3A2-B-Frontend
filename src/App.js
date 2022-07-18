@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Alerts from "./components/Alerts";
 import GlobalContexts from "./components/GlobalContexts";
 import Catalogue from "./pages/Catalogue";
+import Cart from "./components/Cart/Cart";
 import Bag from "./pages/Bag";
 import AdminDashboard from "./pages/AdminDashboard";
 import PrivateRoute from "./components/Auth/PrivateRoute";

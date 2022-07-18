@@ -4,10 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "ghost-white": "#F9F9F9",
-        "cyan-cobalt-blue": "#2555AD",
-        "ue-red": "#B30001",
-        "philippine-yellow ": "#FAC904",
+        'ghost-white': '#F9F9F9',
+        'cyan-cobalt-blue': '#2555AD',
+        'ue-red': '#B30001',
+        'philippine-yellow ': '#FAC904',
+        'checkout-blue': '#2B62C2'
       },
       fontFamily: {
         oswald: ["Oswald"],
@@ -16,8 +17,9 @@ module.exports = {
         tall: { raw: "(max-height:700px)" },
       },
       boxShadow: {
-        card: "5px 10px 10px 5px rgba(0, 0, 0, 0.3)",
-        custom: "2px 2px 2px 2px rgba(0, 0, 0, .1)",
+        'custom': '2px 2px 2px 2px rgba(0, 0, 0, .1)',
+        'custom2': '0px 4px 4px rgba(0, 0, 0, .25)',
+        'custom3': '2px -4px 4px rgba(0, 0, 0, .25)'
       },
     },
   },

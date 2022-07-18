@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import UserContext from "../../contexts/user";
+import React from "react";
 import api from "../../helpers/api";
 import useAlerts from "../../hooks/useAlerts";
 import FormModal from "./FormModal";
@@ -13,7 +12,6 @@ import FormModal from "./FormModal";
  * @returns {HTML} a form modal component with the create listing form fields
  */
 function AddListingModal({ open, onClose }) {
-  const setUser = useContext(UserContext)[1];
   const { addAlert } = useAlerts();
   const formFields = [
     { label: "Name", name: "name", value: "", type: "text" },
@@ -21,19 +19,16 @@ function AddListingModal({ open, onClose }) {
     { label: "Size", name: "size", value: "", type: "text" },
     { label: "Image", name: "image", value: "", type: "file", file: null },
   ];
-
   /**
    * handle Submit is used to describe where to send the data when the sign in form is completed and set error alerts. On success will render success alert and add the item to the catalogues database.
    *
    * @param {Object} event an object containing the event meta data
    */
   function handleSubmit(formData) {
-    console.log(formData);
     api
       .post("/items/add", formData)
       .then((response) => {
-        addAlert({ severity: "success", message: "Successfully Posted Item" });
-        setUser(response.data);
+        addAlert({ severity: "success", message: "Successfully Posted Item" });        
       })
       .catch(() => {
         addAlert({ severity: "warning", message: "Successfully ERRORED" });

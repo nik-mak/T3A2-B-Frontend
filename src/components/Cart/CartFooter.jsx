@@ -9,11 +9,18 @@ import CartTotalContext from "../../contexts/total";
 const CartFooter = () => {
   const setCartItems = useContext(CartContext)[1];
   const cartTotal = useContext(CartTotalContext)[0];
+  const setCartTotal = useContext(CartTotalContext)[1];
 
   const emptyCart = () => {
     api.delete("/cart").then(() => {
       setCartItems([]);
     });
+  };
+
+  const order = () => {
+    api.post("/order/add");
+    setCartItems([]);
+    setCartTotal(0);
   };
 
   return (
@@ -38,7 +45,10 @@ const CartFooter = () => {
               <p className="text-2xl">{cartTotal}</p>
             </div>
           </div>
-          <button className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue text-[20px] text-white hover:bg-cyan-cobalt-blue">
+          <button
+            onClick={order}
+            className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue text-[20px] text-white hover:bg-cyan-cobalt-blue"
+          >
             Purchase
             <NavigateNextIcon />
           </button>

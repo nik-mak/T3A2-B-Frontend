@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Form from "../Form";
@@ -37,6 +37,11 @@ function FormModal({
   description,
 }) {
   const [formData, setFormData] = useState(formFields);
+
+  useEffect(() => {
+    setFormData(formFields)
+  }, [formFields])
+  
   /**
    * handle Submit is used to translate the data into the format for the backend where it is sent to the propHandleSubmit callback.
    *
@@ -65,6 +70,8 @@ function FormModal({
     // ensures that the FormData is cleared after each submit
     setFormData(formFields);
   }
+
+
 
   return (
     <Modal

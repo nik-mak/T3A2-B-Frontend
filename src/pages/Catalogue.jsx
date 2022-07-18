@@ -6,6 +6,8 @@ import HeroBanner from "../components/HeroBanner";
 import SortByButton from "../components/SortByButton";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";
+import ManageListingModal from "../components/modals/ManageListingModal";
+import useModalsReducer from "../hooks/reducers/ModalsReducer";
 
 /**
  * Catalogue page component used to render the catalogue page.
@@ -18,28 +20,31 @@ function Catalogue() {
   const [listings, setListings] = useState([]);
   const [page, setPage] = useState(1);
   const { addAlert } = useAlerts();
-  const [pageCount, setPageCount] = useState(1)
+  const [pageCount, setPageCount] = useState(1);
+  const [modalStates, setModalStates] = useModalsReducer({
+    manageListing: false,
+  });
 
   useEffect(() => {
     api
       .post("/catalogue", {
         page: page,
-        amount: 2,
+        amount: 20,
         sort: selected,
         filter: "available",
       })
       .then((response) => {
-        console.log(response.data)
         setListings(response.data.results);
-        setPageCount(response.data.totalPages)
+        setPageCount(response.data.totalPages);
       })
-      .catch(() => {
-        addAlert({ severity: "warning", message: "Problem trying to sort" });
+      .catch((response) => {
+        addAlert({ severity: "warning", message: response.data });
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, selected]);
 
   /**
-   * Sort handler used to update the catalogue listings when there is a change in the value of the Sort By Button
+   * Sort handler used to update the catalogue listings when there is a change in the value of the Sort By button
    *
    * @param {String} value a string containing the data needed by the backend to organize/filter the catalogue listings
    */
@@ -47,6 +52,11 @@ function Catalogue() {
     setSelected(value);
   }
 
+  /**
+   * Pagination Handler used to update the catalogue listings when there is a change in the value of the pagination button
+   *
+   * @param {String} value a string containing the data needed by the backend to organize/filter the catalogue listings
+   */
   function handlePagination(e, value) {
     setPage(value);
   }
@@ -61,6 +71,7 @@ function Catalogue() {
             onChange={handleSort}
             selected={selected}
             setSelected={setSelected}
+            label="Sort by: "
           />
           <section className="grid grid-flow-row auto-rows-max grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
             {listings.map((listing, index) => {
@@ -85,6 +96,12 @@ function Catalogue() {
           onChange={handlePagination}
         />
       </div>
+      <ManageListingModal
+        open={modalStates.manageListing}
+        onClose={() =>
+          setModalStates({ modalName: "manageListing", action: "close" })
+        }
+      />
     </>
   );
 }

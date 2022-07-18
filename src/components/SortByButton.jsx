@@ -6,10 +6,11 @@ import React from "react";
  * @param {Array} options an array of strings that correspond to the select options
  * @param {Function} onChange a callback function that describes how the button should handle the option change
  * @param {Object} selected a state object containing the string/value of the currently selected option
+ * @param {String} label a string containing the label for the sort by select component
  *
  * @return {HTML} a sort by button that calls an onChange function that is passed in as a prop
  */
-function SortByButton({ options, onChange, selected }) {
+function SortByButton({ options, onChange, selected, label }) {
   /**
    * Event Handler called when there is a change in select component
    *
@@ -21,7 +22,7 @@ function SortByButton({ options, onChange, selected }) {
 
   return (
     <div className="flex font-oswald text-lg tracking-wide">
-      <label>Sort by: </label>
+      <label>{label}</label>
       <select
         value={selected}
         className=" mx-2 rounded-md border border-solid border-slate-300 bg-inherit bg-ghost-white pl-2 hover:border-cyan-cobalt-blue hover:text-cyan-cobalt-blue"

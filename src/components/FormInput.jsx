@@ -30,7 +30,6 @@ function FormInput({ label, type, onChange, value, file }) {
         onChange={onChange}
         className="rounded border border-slate-300 p-2 text-xl font-light"
         {...extraProps}
-        required
       />
     </div>
   );

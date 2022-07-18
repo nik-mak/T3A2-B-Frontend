@@ -17,30 +17,62 @@ import FormModal from "./FormModal";
 function ManageListingModal({ open, onClose }) {
   const setUser = useContext(UserContext)[1];
   const { addAlert } = useAlerts();
-  const selectedListing = useContext(SelectedListingContext)[0]
-
-  const [formFields, setFormFields] = useState([
+  const selectedListing = useContext(SelectedListingContext)[0];
+  const initialFormFields = [
     { label: "Name", name: "name", value: selectedListing.name, type: "text" },
-    { label: "Price (AUD)", name: "price", value: selectedListing.price, type: "number" },
+    {
+      label: "Price (AUD)",
+      name: "price",
+      value: selectedListing.price,
+      type: "number",
+    },
     { label: "Size", name: "size", value: selectedListing.size, type: "text" },
     { label: "Image", name: "image", value: "", type: "file", file: null },
-  ])
+  ];
 
-  useEffect(()=>{
+  const [formFields, setFormFields] = useState(initialFormFields);
+
+  useEffect(() => {
     setFormFields([
-      { label: "Name", name: "name", value: selectedListing.name, type: "text" },
-      { label: "Price (AUD)", name: "price", value: selectedListing.price, type: "number" },
-      { label: "Size", name: "size", value: selectedListing.size, type: "text" },
+      {
+        label: "Name",
+        name: "name",
+        value: selectedListing.name,
+        type: "text",
+      },
+      {
+        label: "Price (AUD)",
+        name: "price",
+        value: selectedListing.price,
+        type: "number",
+      },
+      {
+        label: "Size",
+        name: "size",
+        value: selectedListing.size,
+        type: "text",
+      },
       { label: "Image", name: "image", value: "", type: "file", file: null },
-    ])
-  }, [selectedListing])
+    ]);
+  }, [selectedListing]);
+
+  /**
+   * formatData is used to formate the data and omit the image from being sent in the put request if it is not being updated
+   *
+   * @param {Object} formData a formData object
+   */
+  function formatData(formData) {
+    if (formFields.find((el) => el.name === "image").file === null) {
+      formData.delete("image");
+    }
+  }
   /**
    * handle Submit is used to describe where to send the data when the sign in form is completed and set error alerts. On success will render success alert and add the item to the catalogues database.
    *
    * @param {Object} event an object containing the event meta data
    */
   function handleSubmit(formData) {
-    console.log(formData);
+    formatData(formData);
     api
       .put(`/items/${selectedListing.itemID}`, formData)
       .then((response) => {

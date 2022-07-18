@@ -10,7 +10,7 @@ import NavLogo from "./NavLogo";
 function Navbar() {
 
   return (
-    <nav className="sticky top-0 flex place-content-between bg-white drop-shadow-lg z-50">
+    <nav className="sticky top-0 flex place-content-between bg-white drop-shadow-lg z-[99]">
       <NavLogo/>
       <NavItemsWrapper/>
     </nav>

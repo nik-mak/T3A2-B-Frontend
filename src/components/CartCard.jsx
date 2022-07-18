@@ -27,7 +27,7 @@ function CartCard({ name, image, price, size, id }) {
   };
 
   return (
-    <div className="flex min-w-[300px] flex-row shadow-custom">
+    <div className="flex min-w-[300px] flex-row">
       <div className="mr-2 h-24 w-20 flex-shrink-0 overflow-hidden border border-gray-200">
         <img
           src={image}

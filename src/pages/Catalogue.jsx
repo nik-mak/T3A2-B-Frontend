@@ -18,7 +18,7 @@ function Catalogue() {
   const [listings, setListings] = useState([]);
   const [page, setPage] = useState(1);
   const { addAlert } = useAlerts();
-  const [pageCount, setPageCount] = useState(1)
+  const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
     api
@@ -29,9 +29,9 @@ function Catalogue() {
         filter: "available",
       })
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         setListings(response.data.results);
-        setPageCount(response.data.totalPages)
+        setPageCount(response.data.totalPages);
       })
       .catch(() => {
         addAlert({ severity: "warning", message: "Problem trying to sort" });

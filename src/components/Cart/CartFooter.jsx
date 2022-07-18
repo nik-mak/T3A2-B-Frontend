@@ -4,9 +4,11 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import api from "../../helpers/api";
 import CartContext from "../../contexts/cart";
+import CartTotalContext from "../../contexts/total";
 
 const CartFooter = () => {
   const setCartItems = useContext(CartContext)[1];
+  const cartTotal = useContext(CartTotalContext)[0];
 
   const emptyCart = () => {
     api.delete("/cart").then(() => {
@@ -33,7 +35,7 @@ const CartFooter = () => {
             <p className="text-xl">Total</p>
             <div className="flex flex-row items-center">
               <AttachMoneyIcon />
-              <p className="text-2xl">50</p>
+              <p className="text-2xl">{cartTotal}</p>
             </div>
           </div>
           <button className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue text-[20px] text-white hover:bg-cyan-cobalt-blue">

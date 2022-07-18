@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AlertsContext from "../contexts/alert";
 import CartContext from "../contexts/cart";
+import CartTotalContext from "../contexts/total";
 import UserContext from "../contexts/user";
 import api from "../helpers/api";
 
@@ -15,6 +16,7 @@ function GlobalContexts({ children }) {
   const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState();
+  const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
     api
@@ -31,11 +33,17 @@ function GlobalContexts({ children }) {
     api
       .get("/cart")
       .then(({ data }) => {
-        console.dir(data);
         setCartItems(data);
+        return data;
+      })
+      .then((data) => {
+        const prices = [];
+        data.forEach((item) => prices.push(item.price));
+        const total = prices.reduce((partialSum, a) => partialSum + a, 0);
+        setCartTotal(total);
       })
       .catch();
-  }, []);
+  }, [user]);
 
   if (loading) {
     return <>Loading...</>;
@@ -44,9 +52,11 @@ function GlobalContexts({ children }) {
   return (
     <UserContext.Provider value={[user, setUser]}>
       <CartContext.Provider value={[cartItems, setCartItems]}>
-        <AlertsContext.Provider value={[alerts, setAlerts]}>
-          {children}
-        </AlertsContext.Provider>
+        <CartTotalContext.Provider value={[cartTotal, setCartTotal]}>
+          <AlertsContext.Provider value={[alerts, setAlerts]}>
+            {children}
+          </AlertsContext.Provider>
+        </CartTotalContext.Provider>
       </CartContext.Provider>
     </UserContext.Provider>
   );

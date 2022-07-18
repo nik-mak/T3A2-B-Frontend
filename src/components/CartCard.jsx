@@ -3,6 +3,7 @@ import DollarSignIcon from "./Icons/DollarSignIcon";
 import CloseIcon from "@mui/icons-material/Close";
 import api from "../helpers/api";
 import CartContext from "../contexts/cart";
+import CartTotalContext from "../contexts/total";
 
 /**
  * CartCard is a component that handles rendering a listing card styled like a cart item
@@ -10,15 +11,19 @@ import CartContext from "../contexts/cart";
  * @return {HTML} a styled card
  */
 function CartCard({ name, image, price, size, id }) {
-  const cartItems = useContext(CartContext)[0];
   const setCartItems = useContext(CartContext)[1];
+  const cartTotal = useContext(CartTotalContext)[0];
+  const setCartTotal = useContext(CartTotalContext)[1];
 
   const removeItem = () => {
-    api.delete(`cart/${id}`).then(() => {
-      setCartItems((prevState) => {
-        setCartItems(prevState.filter((item) => item._id !== id));
-      });
-    });
+    api
+      .delete(`cart/${id}`)
+      .then(() => {
+        setCartItems((prevState) => {
+          setCartItems(prevState.filter((item) => item._id !== id));
+        });
+      })
+      .finally(() => setCartTotal(cartTotal - price));
   };
 
   return (

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import CartContext from "../contexts/cart";
+import CartTotalContext from "../contexts/total";
 import UserContext from "../contexts/user";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";
@@ -19,6 +20,8 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
   const user = useContext(UserContext)[0];
   const cartItems = useContext(CartContext)[0]
   const setCartItems = useContext(CartContext)[1]
+  const cartTotal = useContext(CartTotalContext)[0]
+  const setCartTotal = useContext(CartTotalContext)[1]
   const { addAlert } = useAlerts();
 
   /**
@@ -32,6 +35,7 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
           ...cartItems,
           res.data
         ])
+        setCartTotal(cartTotal + res.data.price)
       })
       .then((response) => {
         addAlert({

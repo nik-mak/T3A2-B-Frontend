@@ -27,7 +27,7 @@ function ManageListingModal({ open, onClose }) {
       type: "number",
     },
     { label: "Size", name: "size", value: selectedListing.size, type: "text" },
-    { label: "Image", name: "image", value: "", type: "file", file: null },
+    { label: "Image", name: "image", value: "", type: "file", file: null, notRequired: true },
   ];
 
   const [formFields, setFormFields] = useState(initialFormFields);
@@ -52,7 +52,7 @@ function ManageListingModal({ open, onClose }) {
         value: selectedListing.size,
         type: "text",
       },
-      { label: "Image", name: "image", value: "", type: "file", file: null },
+      { label: "Image", name: "image", value: "", type: "file", file: null, notRequired: true },
     ]);
   }, [selectedListing]);
 
@@ -77,7 +77,6 @@ function ManageListingModal({ open, onClose }) {
       .put(`/items/${selectedListing.itemID}`, formData)
       .then((response) => {
         addAlert({ severity: "success", message: "Successfully updated item" });
-        setUser(response.data);
       })
       .catch((response) => {
         addAlert({ severity: "warning", message: response.data });

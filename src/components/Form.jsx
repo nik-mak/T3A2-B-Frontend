@@ -51,6 +51,7 @@ function Form({
             file={element.file}
             value={element.value}
             type={element.type}
+            notRequired={element.notRequired}
           />
         ))}
         <button

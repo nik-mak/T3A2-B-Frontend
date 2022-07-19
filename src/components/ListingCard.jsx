@@ -22,14 +22,18 @@ import BinIcon from "./Icons/BinIcon";
  * @return {HTML} a listing card
  */
 function ListingCard({ heading, size, price, imageURL, itemID }) {
+  // Defines the user so that roles can be checked when rendering components.
   const { user } = useContext(UserContext);
-  const cartItems = useContext(CartContext)[0];
-  const setCartItems = useContext(CartContext)[1];
-  const cartTotal = useContext(CartTotalContext)[0];
-  const setCartTotal = useContext(CartTotalContext)[1];
+  // Defines teh cart items to be displayed in the cart
+  const [cartItems, setCartItems] = useContext(CartContext)
+  const [cartTotal, setCartTotal] = useContext(CartTotalContext)
 
+  // Defines the addAlert method used to create new alerts
   const { addAlert } = useAlerts();
+
+  // Defines the isRemoved property that is used to hide/remove the specific listing from the catalogue if it has been removed
   const [isRemoved, setIsRemoved] = useState(false);
+
   // defines modalStates and setModalStates using context provider
   const setModalStates = useContext(ModalsContext)[1];
   const setSelectedListing = useContext(SelectedListingContext)[1];
@@ -63,26 +67,22 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
       .then((res) => {
         setCartItems([...cartItems, res.data]);
         setCartTotal(cartTotal + res.data.price);
-      })
-      .then((response) => {
         addAlert({
           severity: "success",
-          message: response.data,
+          message: `Successfully added '${heading}' to the your cart!`,
         });
       })
       .catch((response) => {
         if (user === undefined) {
           addAlert({
             severity: "warning",
-            message: "Please login to add this item to your cart",
+            message: response.message,
           });
-        } else {
-          console.log(response);
           addAlert({
             severity: "warning",
-            message: response.request.response,
+            message: "Please login to add this item to your cart",
           });
-        }
+        } 
       });
   }
 

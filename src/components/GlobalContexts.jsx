@@ -57,6 +57,7 @@ function GlobalContexts({ children }) {
       .catch();
   }, [user]);
 
+  // Used to render loading while useEffects is fetching the user information
   if (loading) {
     return <>Loading...</>;
   }

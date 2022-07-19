@@ -32,12 +32,13 @@ function Bag() {
           : "/order",
         {
           page: page,
-          amount: 2,
+          amount: 1,
           sort: selectedSort,
           filter: filter,
         }
       )
       .then((response) => {
+        console.log(response)
         setOrders(response.data.results);
         setPageCount(response.data.totalPages);
       })
@@ -101,7 +102,7 @@ function Bag() {
       ) : (
         <section className="pt-10">
           <h2 className="text-center font-oswald text-4xl">
-            No orders are {`${filter}`}.
+            No orders found for filter: {`${filter}`}.
           </h2>
         </section>
       )}

@@ -26,9 +26,6 @@ import ModalsContext from "../../contexts/modals";
 import ShowCartContext from "../../contexts/showCart";
 import Cart from "../cart/Cart";
 
-// Defines the modals used in the Navbar
-const initialState = { signUp: false, login: false, addListing: false };
-
 /**
  * Nav Item wrapper that contains nav items and relevant modals
  *
@@ -128,17 +125,26 @@ function NavItemsWrapper() {
           ) : (
             <Paper className={"absolute top-[80px] sm:top-[97px]"}>
               <MenuList dense>
-                <MenuItem onClick={navigateToHome}>
+                <MenuItem onClick={() => {
+                  navigateToHome()
+                  setSettingsState(!settingsState)
+                }}>
                   <ListItemText>Manage Listings</ListItemText>
                 </MenuItem>
                 <HasRole roles={["admin"]}>
                   <Divider />
-                  <MenuItem onClick={navigateToAdmin}>
+                  <MenuItem onClick={() => {
+                  navigateToAdmin()
+                  setSettingsState(!settingsState)
+                }}>
                     <ListItemText>Admin Dashboard</ListItemText>
                   </MenuItem>
                 </HasRole>
                 <Divider />
-                <MenuItem onClick={navigateToBag}>
+                <MenuItem onClick={() => {
+                  navigateToBag()
+                  setSettingsState(!settingsState)
+                }}>
                   <ListItemText>Listings on hold</ListItemText>
                 </MenuItem>
               </MenuList>

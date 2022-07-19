@@ -13,6 +13,7 @@ import React from "react";
 function FormInput({ label, type, onChange, value, file, notRequired }) {
   const isImage = file !== undefined
   const extraProps = {};
+  const isNumber = type === "number"
   // Checks if the input field is for an image and sets any extra props required to handle upload
   if (isImage) {
     extraProps.accept = ".jpg, .gif, .png";
@@ -20,8 +21,9 @@ function FormInput({ label, type, onChange, value, file, notRequired }) {
   } else {
     extraProps.value = value || "";
   }
-  // Checks if the input field is required
+
   notRequired ? (extraProps.required = false) : (extraProps.required=true)
+  isNumber ? ((extraProps.min = "0") && (extraProps.step="0.01")) : (extraProps.min = "")
 
   return (
     <div className="flex flex-col space-y-6 font-oswald text-xl">
@@ -32,7 +34,6 @@ function FormInput({ label, type, onChange, value, file, notRequired }) {
         onChange={onChange}
         className="rounded border border-slate-300 p-2 text-xl font-light"
         {...extraProps}
-
       />
     </div>
   );

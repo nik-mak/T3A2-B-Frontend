@@ -51,7 +51,7 @@ function Form({
             file={element.file}
             value={element.value}
             type={element.type}
-            notRequired={element.isUpdate}
+            notRequired={element.notRequired}
           />
         ))}
         <button

@@ -77,7 +77,6 @@ function ManageListingModal({ open, onClose }) {
       .put(`/items/${selectedListing.itemID}`, formData)
       .then((response) => {
         addAlert({ severity: "success", message: "Successfully updated item" });
-        setUser(response.data);
       })
       .catch((response) => {
         addAlert({ severity: "warning", message: response.data });

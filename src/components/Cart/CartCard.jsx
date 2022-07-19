@@ -23,6 +23,7 @@ function CartCard({ name, image, price, size, id, removable }) {
           setCartItems(prevState.filter((item) => item._id !== id));
         });
       })
+      .catch(() => {}) // !!!!!!!!
       .finally(() => setCartTotal(cartTotal - price));
   };
 

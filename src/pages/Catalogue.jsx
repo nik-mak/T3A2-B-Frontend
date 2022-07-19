@@ -38,7 +38,7 @@ function Catalogue() {
         setPageCount(response.data.totalPages);
       })
       .catch((response) => {
-        addAlert({ severity: "warning", message: response.data });
+        addAlert({ severity: "warning", message: "Failed to perform that action because of: " + response.message });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, selected]);

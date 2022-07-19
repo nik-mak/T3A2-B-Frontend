@@ -38,6 +38,7 @@ function FormModal({
 }) {
   const [formData, setFormData] = useState(formFields);
 
+  // Sets form data whenever formFields changes
   useEffect(() => {
     setFormData(formFields)
   }, [formFields])

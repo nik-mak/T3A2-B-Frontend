@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import SelectedListingContext from "../../contexts/selectedListing";
-import UserContext from "../../contexts/user";
 import api from "../../helpers/api";
 import useAlerts from "../../hooks/useAlerts";
 import FormModal from "./FormModal";
@@ -15,9 +14,9 @@ import FormModal from "./FormModal";
  * @returns {HTML} a form modal component with the create listing form fields
  */
 function ManageListingModal({ open, onClose }) {
-  const setUser = useContext(UserContext)[1];
   const { addAlert } = useAlerts();
   const selectedListing = useContext(SelectedListingContext)[0];
+  // Defines the initial form fields
   const initialFormFields = [
     { label: "Name", name: "name", value: selectedListing.name, type: "text" },
     {
@@ -27,11 +26,18 @@ function ManageListingModal({ open, onClose }) {
       type: "number",
     },
     { label: "Size", name: "size", value: selectedListing.size, type: "text" },
-    { label: "Image", name: "image", value: "", type: "file", file: null, notRequired: true },
+    {
+      label: "Image",
+      name: "image",
+      value: "",
+      type: "file",
+      file: null,
+      notRequired: true,
+    },
   ];
 
   const [formFields, setFormFields] = useState(initialFormFields);
-
+  // sets the form fields whenever the selected listing changes
   useEffect(() => {
     setFormFields([
       {
@@ -52,7 +58,14 @@ function ManageListingModal({ open, onClose }) {
         value: selectedListing.size,
         type: "text",
       },
-      { label: "Image", name: "image", value: "", type: "file", file: null, notRequired: true },
+      {
+        label: "Image",
+        name: "image",
+        value: "",
+        type: "file",
+        file: null,
+        notRequired: true,
+      },
     ]);
   }, [selectedListing]);
 
@@ -75,11 +88,11 @@ function ManageListingModal({ open, onClose }) {
     formatData(formData);
     api
       .put(`/items/${selectedListing.itemID}`, formData)
-      .then((response) => {
+      .then(() => {
         addAlert({ severity: "success", message: "Successfully updated item" });
       })
-      .catch((response) => {
-        addAlert({ severity: "warning", message: response.data });
+      .catch((error) => {
+        addAlert({ severity: "warning", message: `Failed to update ${selectedListing.name} because of: ` +error.message });
       });
     onClose();
   }

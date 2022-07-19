@@ -31,11 +31,11 @@ function AddStaffModal({ open, onClose, setStaff, staff }) {
         setStaff([response.data, ...staff]);
         addAlert({
           severity: "success",
-          message: "Successfully Created New Staff Account",
-        }); // edit the messages
+          message: "Successfully created new staff account",
+        });
       })
-      .catch(() => {
-        addAlert({ severity: "warning", message: "Successfully ERRORED" });
+      .catch((error) => {
+        addAlert({ severity: "warning", message: "Failed to create new staff because of: " +error.message });
       })
       .finally(() => {
         onClose();

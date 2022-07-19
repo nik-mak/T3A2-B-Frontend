@@ -42,19 +42,21 @@ function GlobalContexts({ children }) {
   }, []);
 
   useEffect(() => {
-    api
-      .get("/cart")
-      .then(({ data }) => {
-        setCartItems(data);
-        return data;
-      })
-      .then((data) => {
-        const prices = [];
-        data.forEach((item) => prices.push(item.price));
-        const total = prices.reduce((partialSum, a) => partialSum + a, 0);
-        setCartTotal(total);
-      })
-      .catch();
+    if (user && (user.role === "customer")) {
+      api
+        .get("/cart")
+        .then(({ data }) => {
+          setCartItems(data);
+          return data;
+        })
+        .then((data) => {
+          const prices = [];
+          data.forEach((item) => prices.push(item.price));
+          const total = prices.reduce((partialSum, a) => partialSum + a, 0);
+          setCartTotal(total);
+        })
+        .catch();
+    }
   }, [user]);
 
   // Used to render loading while useEffects is fetching the user information

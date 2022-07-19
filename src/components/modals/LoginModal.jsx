@@ -31,8 +31,8 @@ function LoginModal({ open, onClose }) {
       setUser(response.data)
       addAlert({severity:"success", message:"Successfully Logged In"})
     })
-    .catch( () => { 
-      addAlert({severity:"warning", message:"Successfully ERRORED"})
+    .catch((error) => { 
+      addAlert({severity:"warning", message: "Failed to update login because of: " +error.message})
     })
     .finally( () => {
       onClose()

@@ -6,6 +6,7 @@ import api from "../../helpers/api";
 import CartContext from "../../contexts/cart";
 import CartTotalContext from "../../contexts/total";
 import useAlerts from "../../hooks/useAlerts";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Cart Footer component that renders the total amount of all items in the cart, purchase button, and empty cart button.
@@ -19,6 +20,11 @@ const CartFooter = () => {
   const cartTotal = useContext(CartTotalContext)[0];
   const setCartTotal = useContext(CartTotalContext)[1];
 
+  const navigate = useNavigate();
+  const navigateToBag = () => {
+    navigate("/bag");
+  };
+
   const emptyCart = () => {
     api
       .delete("/cart")
@@ -26,17 +32,19 @@ const CartFooter = () => {
         setCartItems([]);
       })
       .then(() => setCartTotal(0))
-      .catch(() => {
+      .catch((error) => {
         addAlert({
           severity: "warning",
-          message: "An unexpected error occurred",
-        });
-      });
+          message: "Failed to empty the cart because of: " + (error.response.data || error.message),
+        })
+      })
+      .finally(navigateToBag())
   };
 
   // Checkout function to move items from cart to orders
   // Marks items as sold
   const order = () => {
+
     if (cartItems.length > 0) {
       api
         .post("/order/add")
@@ -80,7 +88,10 @@ const CartFooter = () => {
             </div>
           </div>
           <button
-            onClick={order}
+            onClick={() => {
+              order()
+              navigateToBag()
+            }}
             className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue text-[20px] pl-3 text-white hover:bg-cyan-cobalt-blue"
           >
             Purchase

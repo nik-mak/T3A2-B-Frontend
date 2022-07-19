@@ -30,8 +30,8 @@ function SignUpModal({ open, onClose }) {
       setUser(response.data)
       addAlert({severity:"success", message:"Successfully Signed Up & Logged In"})
     })
-    .catch( () => { 
-      addAlert({severity:"warning", message:"Successfully Errored"})
+    .catch( (error) => { 
+      addAlert({severity:"warning", message: "Failed to register because of: " + (error.response.data || error.message)})
     })
     .finally( () => {
       onClose()

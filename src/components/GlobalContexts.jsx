@@ -3,7 +3,7 @@ import AlertsContext from "../contexts/alert";
 import CartContext from "../contexts/cart";
 import CartTotalContext from "../contexts/total";
 import ModalsContext from "../contexts/modals";
-import SelectedListingContext from "../contexts/selecteListing";
+import SelectedListingContext from "../contexts/selectedListing";
 import UserContext from "../contexts/user";
 import api from "../helpers/api";
 import useModalsReducer from "../hooks/reducers/ModalsReducer";
@@ -42,19 +42,21 @@ function GlobalContexts({ children }) {
   }, []);
 
   useEffect(() => {
-    api
-      .get("/cart")
-      .then(({ data }) => {
-        setCartItems(data);
-        return data;
-      })
-      .then((data) => {
-        const prices = [];
-        data.forEach((item) => prices.push(item.price));
-        const total = prices.reduce((partialSum, a) => partialSum + a, 0);
-        setCartTotal(total);
-      })
-      .catch();
+    if (user && (user.role === "customer")) {
+      api
+        .get("/cart")
+        .then(({ data }) => {
+          setCartItems(data);
+          return data;
+        })
+        .then((data) => {
+          const prices = [];
+          data.forEach((item) => prices.push(item.price));
+          const total = prices.reduce((partialSum, a) => partialSum + a, 0);
+          setCartTotal(total);
+        })
+        .catch();
+    }
   }, [user]);
 
   // Used to render loading while useEffects is fetching the user information

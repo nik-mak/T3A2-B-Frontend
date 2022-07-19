@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import api from "../helpers/api";
-import useAlerts from "../hooks/useAlerts";
-import HasRole from "./Auth/HasRole";
-import CartCard from "./CartCard";
+import api from "../../helpers/api";
+import useAlerts from "../../hooks/useAlerts";
+import HasRole from "../auth/HasRole";
+import CartCard from "../cart/CartCard";
 
 /**
  * ListingCard is a component that handles rendering a listing card to be displayed in the catalogue
@@ -38,7 +38,7 @@ function OrderCard({ index, date, shopperName, items, totalPrice, collected }) {
       </h2>
       <p className="pl-1">Placed on: {date}</p>
       <p className="pb-2 pl-1 shadow-md">Placed by {shopperName}</p>
-      <div className="h-56 space-y-3 overflow-auto rounded-md shadow-md">
+      <div className="h-56 space-y-3 overflow-auto rounded-md">
         {/* Maps out the order items in a cart card style to be displayed on the order card */}
         {items.map((item, index) => {
           return (
@@ -48,6 +48,7 @@ function OrderCard({ index, date, shopperName, items, totalPrice, collected }) {
               size={item.size}
               price={item.price}
               image={item.image}
+              removable={false}
             />
           );
         })}

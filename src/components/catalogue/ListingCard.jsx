@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
-import CartContext from "../contexts/cart";
-import CartTotalContext from "../contexts/total";
-import ModalsContext from "../contexts/modals";
-import SelectedListingContext from "../contexts/selecteListing";
-import UserContext from "../contexts/user";
-import api from "../helpers/api";
-import useAlerts from "../hooks/useAlerts";
-import HasRole from "./Auth/HasRole";
-import NotLoggedIn from "./Auth/NotLoggedIn";
-import BinIcon from "./Icons/BinIcon";
+import CartContext from "../../contexts/cart";
+import CartTotalContext from "../../contexts/total";
+import ModalsContext from "../../contexts/modals";
+import SelectedListingContext from "../.././contexts/selectedListing";
+import UserContext from "../../contexts/user";
+import api from "../../helpers/api";
+import useAlerts from "../../hooks/useAlerts";
+import HasRole from ".././auth/HasRole";
+import NotLoggedIn from ".././auth/NotLoggedIn";
+import BinIcon from ".././Icons/BinIcon";
 
 /**
  * ListingCard is a component that handles rendering a listing card to be displayed in the catalogue
@@ -47,14 +47,14 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
       .then(() => {
         addAlert({
           severity: "success",
-          message: `Successfully removed item ${heading}`,
+          message: `Successfully removed item '${heading}'`,
         });
         setIsRemoved(true);
       })
-      .catch((response) => {
+      .catch((error) => {
         addAlert({
           severity: "warning",
-          message: response.message,
+          message: `Failed to remove item '${heading}' because of: ` + (error.response.data || error.message),
         });
       });
   }

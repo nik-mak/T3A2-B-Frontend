@@ -6,6 +6,7 @@ import api from "../../helpers/api";
 import CartContext from "../../contexts/cart";
 import CartTotalContext from "../../contexts/total";
 import useAlerts from "../../hooks/useAlerts";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Cart Header component that renders the close cart button, cart title, and purchase button.
@@ -15,9 +16,14 @@ import useAlerts from "../../hooks/useAlerts";
 const CartHeader = () => {
   const { addAlert } = useAlerts();
   const setShowCart = useContext(ShowCartContext)[1];
-  const cartItems = useContext(CartContext)[0]
+  const cartItems = useContext(CartContext)[0];
   const setCartItems = useContext(CartContext)[1];
   const setCartTotal = useContext(CartTotalContext)[1];
+
+  const navigate = useNavigate();
+  const navigateToBag = () => {
+    navigate("/bag");
+  };
 
   // Checkout function to move items from cart to orders
   // Marks items as sold
@@ -27,17 +33,20 @@ const CartHeader = () => {
         .post("/order/add")
         .then(() => setCartItems([]))
         .then(() => setCartTotal(0))
-        .catch(() => {
+        .catch((error) => {
           addAlert({
             severity: "warning",
-            message: "An unexpected error occurred",
+            message:
+              "Failed to place order because of: " +
+              (error.response.data || error.message),
           });
-        });
+        })
+        .finally(navigateToBag())
     } else {
       addAlert({
         severity: "warning",
-        message: "Cart is empty"
-      })
+        message: "Failed to place order because cart is empty.",
+      });
     }
   };
 
@@ -53,7 +62,12 @@ const CartHeader = () => {
         </button>
         <h1 className="pl-3 text-center text-4xl">Cart</h1>
       </div>
-      <button onClick={order} className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue text-[20px] text-white hover:bg-cyan-cobalt-blue pl-3">
+      <button
+        onClick={() => {
+          order()
+        }}
+        className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue pl-3 text-[20px] text-white hover:bg-cyan-cobalt-blue"
+      >
         Purchase
         <NavigateNextIcon />
       </button>

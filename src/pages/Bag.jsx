@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import OrderCard from "../components/OrderCard";
+import OrderCard from "../components/bag/OrderCard";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";
 import dayjs from "dayjs";
@@ -13,16 +13,15 @@ import { Pagination } from "@mui/material";
  * @return {HTML} the bag page for the desperate housewares website
  */
 function Bag() {
-  const filters = ["none", "pending", "collected"];
-  const options = ["recent", "price(high - low)", "price(low - high)"];
+  // Defines the filters used in the filter dropdown
+  const filters = ["recent", "pending", "collected"];
+
   const { addAlert } = useAlerts();
-  const [selectedSort, setSelectedSort] = useState(options[0]);
   const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState(filters[0]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState();
   const currentUser = useContext(UserContext)[0];
-
   // useEffect to call the API and set the pages and orders to be displayed on the bag page on mount or when page/filter/selectedSort state changes
   useEffect(() => {
     api
@@ -32,21 +31,20 @@ function Bag() {
           : "/order",
         {
           page: page,
-          amount: 20,
-          sort: selectedSort,
+          amount: 10,
+          sort: "default",
           filter: filter,
         }
       )
       .then((response) => {
         setOrders(response.data.results);
         setPageCount(response.data.totalPages);
-        console.log(response.data);
       })
-      .catch(() => {
-        addAlert({ severity: "warning", message: "Something went wrong" });
+      .catch((error) => {
+        addAlert({ severity: "warning", message: "Failed to retrieve orders because of: " + (error.response.data || error.message)});
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, filter, selectedSort]);
+  }, [page, filter]);
 
   function handleFilter(value) {
     setFilter(value);
@@ -54,10 +52,6 @@ function Bag() {
 
   function handlePagination(e, value) {
     setPage(value);
-  }
-
-  function handleSort(value) {
-    setSelectedSort(value);
   }
 
   return (
@@ -71,13 +65,6 @@ function Bag() {
           onChange={handleFilter}
           selected={filter}
           setSelected={setFilter}
-          label="Filter by: "
-        />
-        <SortByButton
-          options={options}
-          onChange={handleSort}
-          selected={selectedSort}
-          setSelected={setSelectedSort}
           label="Sort by: "
         />
       </div>
@@ -102,7 +89,7 @@ function Bag() {
       ) : (
         <section className="pt-10">
           <h2 className="text-center font-oswald text-4xl">
-            No orders are {`${filter}`}.
+            No orders found for filter: {`${filter}`}.
           </h2>
         </section>
       )}

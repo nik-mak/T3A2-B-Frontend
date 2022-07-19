@@ -1,6 +1,6 @@
 import React from "react";
 import HeroImage from "./HeroImage";
-import HeartIcon from "./Icons/HeartIcon";
+import HeartIcon from "../Icons/HeartIcon";
 
 // Heart svg styling to position it correctly.
 const heartStyle = {
@@ -30,7 +30,7 @@ function HeroBanner() {
       </div>
       <div className="absolute flex w-4/5 md:w-2/5 flex-col space-y-4 rounded-lg bg-ghost-white py-11 text-center drop-shadow-lg z-10" style={missionStyle}>
         <h2 className="inline font-oswald text-2xl md:text-3xl xl:text-4xl">Our Mission</h2>
-        <p className="inline font-oswald text-xl md:text-xl xl:text-2xl font-light">
+        <p className="inline font-oswald text-xl md:text-xl xl:text-2xl font-light p-2">
           Shining light on community-driven op shops so you can thrive on your
           next thrift!
         </p>

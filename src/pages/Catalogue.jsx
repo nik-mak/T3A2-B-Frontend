@@ -1,8 +1,8 @@
 import { Pagination } from "@mui/material";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import ListingCard from "../components/ListingCard";
-import HeroBanner from "../components/HeroBanner";
+import ListingCard from "../components/catalogue/ListingCard";
+import HeroBanner from "../components/catalogue/HeroBanner";
 import SortByButton from "../components/SortByButton";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";
@@ -38,7 +38,11 @@ function Catalogue() {
         setPageCount(response.data.totalPages);
       })
       .catch((response) => {
-        addAlert({ severity: "warning", message: response.data });
+        addAlert({
+          severity: "warning",
+          message:
+            "Failed to retrieve catalogue because of: " + response.message,
+        });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, selected]);

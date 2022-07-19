@@ -1,19 +1,21 @@
 import React, { useContext } from "react";
-import DollarSignIcon from "./Icons/DollarSignIcon";
+import DollarSignIcon from "../Icons/DollarSignIcon";
 import CloseIcon from "@mui/icons-material/Close";
-import api from "../helpers/api";
-import CartContext from "../contexts/cart";
-import CartTotalContext from "../contexts/total";
+import api from "../../helpers/api";
+import CartContext from "../../contexts/cart";
+import CartTotalContext from "../../contexts/total";
+import useAlerts from "../../hooks/useAlerts";
 
 /**
  * CartCard is a component that handles rendering a listing card styled like a cart item
  *
  * @return {HTML} a styled card
  */
-function CartCard({ name, image, price, size, id }) {
+function CartCard({ name, image, price, size, id, removable }) {
   const setCartItems = useContext(CartContext)[1];
   const cartTotal = useContext(CartTotalContext)[0];
   const setCartTotal = useContext(CartTotalContext)[1];
+  const {addAlert} = useAlerts()
 
   const removeItem = () => {
     api
@@ -23,11 +25,17 @@ function CartCard({ name, image, price, size, id }) {
           setCartItems(prevState.filter((item) => item._id !== id));
         });
       })
+      .catch((error) => {
+        addAlert({
+          severity: "warning",
+          message: "Failed to remove item because of: " + error.message,
+        });
+      }) 
       .finally(() => setCartTotal(cartTotal - price));
   };
 
   return (
-    <div className="flex min-w-[300px] flex-row">
+    <div className="flex min-w-[300px] flex-row shadow-custom2">
       <div className="mr-2 h-24 w-20 flex-shrink-0 overflow-hidden border border-gray-200">
         <img
           src={image}
@@ -38,12 +46,16 @@ function CartCard({ name, image, price, size, id }) {
       <div className="flex w-full flex-col justify-between font-oswald">
         <div className="flex justify-between text-xl">
           <p>{name}</p>
-          <button
-            onClick={removeItem}
-            className="mr-2 flex items-center hover:rounded-full hover:bg-ue-red hover:text-white"
-          >
-            <CloseIcon />
-          </button>
+          {removable ? (
+            <button
+              onClick={removeItem}
+              className="mr-2 flex items-center hover:rounded-full hover:bg-ue-red hover:text-white"
+            >
+              <CloseIcon />
+            </button>
+          ) : (
+            ""
+          )}
         </div>
         <div className="flex justify-between">
           <p className="text-lg">Size: {size}</p>

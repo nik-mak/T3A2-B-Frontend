@@ -3,7 +3,7 @@ import AlertsContext from "../contexts/alert";
 import CartContext from "../contexts/cart";
 import CartTotalContext from "../contexts/total";
 import ModalsContext from "../contexts/modals";
-import SelectedListingContext from "../contexts/selecteListing";
+import SelectedListingContext from "../contexts/selectedListing";
 import UserContext from "../contexts/user";
 import api from "../helpers/api";
 import useModalsReducer from "../hooks/reducers/ModalsReducer";

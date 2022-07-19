@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
-import CartContext from "../contexts/cart";
-import CartTotalContext from "../contexts/total";
-import ModalsContext from "../contexts/modals";
-import SelectedListingContext from "../contexts/selecteListing";
-import UserContext from "../contexts/user";
-import api from "../helpers/api";
-import useAlerts from "../hooks/useAlerts";
-import HasRole from "./Auth/HasRole";
-import NotLoggedIn from "./Auth/NotLoggedIn";
-import BinIcon from "./Icons/BinIcon";
+import CartContext from "../../contexts/cart";
+import CartTotalContext from "../../contexts/total";
+import ModalsContext from "../../contexts/modals";
+import SelectedListingContext from "../.././contexts/selectedListing";
+import UserContext from "../../contexts/user";
+import api from "../../helpers/api";
+import useAlerts from "../../hooks/useAlerts";
+import HasRole from ".././auth/HasRole";
+import NotLoggedIn from ".././auth/NotLoggedIn";
+import BinIcon from ".././Icons/BinIcon";
 
 /**
  * ListingCard is a component that handles rendering a listing card to be displayed in the catalogue

@@ -1,8 +1,8 @@
 import { Pagination } from "@mui/material";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import ListingCard from "../components/ListingCard";
-import HeroBanner from "../components/HeroBanner";
+import ListingCard from "../components/catalogue/ListingCard";
+import HeroBanner from "../components/catalogue/HeroBanner";
 import SortByButton from "../components/SortByButton";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";

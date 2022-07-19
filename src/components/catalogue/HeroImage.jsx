@@ -1,5 +1,5 @@
 import React from "react";
-import heroimg from "../assets/heroimg.jpg";
+import heroimg from "../../assets/heroimg.jpg";
 
 /**
  * HeroImage is a component that handles rendering the hero image for the website

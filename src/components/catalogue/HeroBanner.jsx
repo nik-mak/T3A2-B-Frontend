@@ -1,6 +1,6 @@
 import React from "react";
 import HeroImage from "./HeroImage";
-import HeartIcon from "./Icons/HeartIcon";
+import HeartIcon from "../Icons/HeartIcon";
 
 // Heart svg styling to position it correctly.
 const heartStyle = {

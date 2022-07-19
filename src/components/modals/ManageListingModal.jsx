@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
-import SelectedListingContext from "../../contexts/selecteListing";
+import SelectedListingContext from "../../contexts/selectedListing";
 import UserContext from "../../contexts/user";
 import api from "../../helpers/api";
 import useAlerts from "../../hooks/useAlerts";

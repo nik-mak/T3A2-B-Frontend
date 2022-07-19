@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import OrderCard from "../components/OrderCard";
+import OrderCard from "../components/bag/OrderCard";
 import api from "../helpers/api";
 import useAlerts from "../hooks/useAlerts";
 import dayjs from "dayjs";
@@ -32,7 +32,7 @@ function Bag() {
           : "/order",
         {
           page: page,
-          amount: 20,
+          amount: 2,
           sort: selectedSort,
           filter: filter,
         }
@@ -40,7 +40,6 @@ function Bag() {
       .then((response) => {
         setOrders(response.data.results);
         setPageCount(response.data.totalPages);
-        console.log(response.data);
       })
       .catch(() => {
         addAlert({ severity: "warning", message: "Something went wrong" });

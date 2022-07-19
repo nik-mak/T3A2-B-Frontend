@@ -10,9 +10,9 @@ import LogoutIcon from "../Icons/LogoutIcon";
 import api from "../../helpers/api";
 import UserContext from "../../contexts/user";
 import useAlerts from "../../hooks/useAlerts";
-import HasRole from "../Auth/HasRole";
-import LoggedIn from "../Auth/LoggedIn";
-import NotLoggedIn from "../Auth/NotLoggedIn";
+import HasRole from "../auth/HasRole";
+import LoggedIn from "../auth/LoggedIn";
+import NotLoggedIn from "../auth/NotLoggedIn";
 import AddListingIcon from "../Icons/AddListingIcon";
 import CartContext from "../../contexts/cart";
 import CartTotalContext from "../../contexts/total";
@@ -24,7 +24,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ModalsContext from "../../contexts/modals";
 import ShowCartContext from "../../contexts/showCart";
-import Cart from "../Cart/Cart";
+import Cart from "../cart/Cart";
 
 // Defines the modals used in the Navbar
 const initialState = { signUp: false, login: false, addListing: false };

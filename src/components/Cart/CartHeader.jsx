@@ -27,16 +27,16 @@ const CartHeader = () => {
         .post("/order/add")
         .then(() => setCartItems([]))
         .then(() => setCartTotal(0))
-        .catch(() => {
+        .catch((error) => {
           addAlert({
             severity: "warning",
-            message: "An unexpected error occurred",
+            message: "Failed to place order because of: " + (error.response.data || error.message),
           });
         });
     } else {
       addAlert({
         severity: "warning",
-        message: "Cart is empty"
+        message: "Failed to place order because cart is empty."
       })
     }
   };

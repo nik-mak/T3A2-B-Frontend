@@ -31,7 +31,7 @@ function AddListingModal({ open, onClose }) {
         addAlert({ severity: "success", message: "Successfully Posted Item" });        
       })
       .catch((error) => {
-        addAlert({ severity: "warning", message: "Failed to create item because of: " + error.message });
+        addAlert({ severity: "warning", message: "Failed to create item because of: " + (error.response.data || error.message)});
       })
     onClose();
   }

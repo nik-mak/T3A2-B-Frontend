@@ -35,7 +35,7 @@ function AddStaffModal({ open, onClose, setStaff, staff }) {
         });
       })
       .catch((error) => {
-        addAlert({ severity: "warning", message: "Failed to create new staff because of: " +error.message });
+        addAlert({ severity: "warning", message: "Failed to create new staff because of: " +(error.response.data || error.message) });
       })
       .finally(() => {
         onClose();

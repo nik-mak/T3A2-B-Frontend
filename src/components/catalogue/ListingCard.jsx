@@ -47,14 +47,14 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
       .then(() => {
         addAlert({
           severity: "success",
-          message: `Successfully removed item ${heading}`,
+          message: `Successfully removed item '${heading}'`,
         });
         setIsRemoved(true);
       })
-      .catch((response) => {
+      .catch((error) => {
         addAlert({
           severity: "warning",
-          message: response.message,
+          message: `Failed to remove item '${heading}' because of: ` + (error.response.data || error.message),
         });
       });
   }

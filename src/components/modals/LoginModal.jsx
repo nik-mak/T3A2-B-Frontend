@@ -23,7 +23,7 @@ function LoginModal({ open, onClose }) {
   /**
    * handle Submit is used to describe where to send the data when the sign in form is completed and set error alerts. On success will render success alert and log in the user.
    *
-   * @param {Object} event an object containing the event meta data
+   * @param {Object} formData an object containing the login forms data.
    */
   function handleSubmit(formData) {
     api.post("/auth/login", formData)
@@ -32,7 +32,7 @@ function LoginModal({ open, onClose }) {
       addAlert({severity:"success", message:"Successfully Logged In"})
     })
     .catch((error) => { 
-      addAlert({severity:"warning", message: "Failed to update login because of: " +error.message})
+      addAlert({severity:"warning", message: "Failed to login because of: " +(error.response.data || error.message)})
     })
     .finally( () => {
       onClose()

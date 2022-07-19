@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import api from "../../helpers/api";
 import CartContext from "../../contexts/cart";
 import CartTotalContext from "../../contexts/total";
+import useAlerts from "../../hooks/useAlerts";
 
 /**
  * CartCard is a component that handles rendering a listing card styled like a cart item
@@ -14,6 +15,7 @@ function CartCard({ name, image, price, size, id, removable }) {
   const setCartItems = useContext(CartContext)[1];
   const cartTotal = useContext(CartTotalContext)[0];
   const setCartTotal = useContext(CartTotalContext)[1];
+  const {addAlert} = useAlerts()
 
   const removeItem = () => {
     api

@@ -40,8 +40,8 @@ function Bag() {
         setOrders(response.data.results);
         setPageCount(response.data.totalPages);
       })
-      .catch(() => {
-        addAlert({ severity: "warning", message: "Something went wrong" });
+      .catch((error) => {
+        addAlert({ severity: "warning", message: "Failed to retrieve orders because of: " + (error.response.data || error.message)});
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, filter]);

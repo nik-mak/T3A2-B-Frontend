@@ -26,10 +26,10 @@ const CartFooter = () => {
         setCartItems([]);
       })
       .then(() => setCartTotal(0))
-      .catch(() => {
+      .catch((error) => {
         addAlert({
           severity: "warning",
-          message: "An unexpected error occurred",
+          message: "Failed to empty the cart because of: " + (error.response.data || error.message),
         });
       });
   };

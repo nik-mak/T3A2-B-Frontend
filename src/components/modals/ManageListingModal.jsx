@@ -92,7 +92,7 @@ function ManageListingModal({ open, onClose }) {
         addAlert({ severity: "success", message: "Successfully updated item" });
       })
       .catch((error) => {
-        addAlert({ severity: "warning", message: `Failed to update ${selectedListing.name} because of: ` +error.message });
+        addAlert({ severity: "warning", message: `Failed to update ${selectedListing.name} because of: ` +(error.response.data || error.message) });
       });
     onClose();
   }

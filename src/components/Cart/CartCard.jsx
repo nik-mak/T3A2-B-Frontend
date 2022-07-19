@@ -23,7 +23,12 @@ function CartCard({ name, image, price, size, id, removable }) {
           setCartItems(prevState.filter((item) => item._id !== id));
         });
       })
-      .catch(() => {}) // !!!!!!!!
+      .catch((error) => {
+        addAlert({
+          severity: "warning",
+          message: "Failed to remove item because of: " + error.message,
+        });
+      }) 
       .finally(() => setCartTotal(cartTotal - price));
   };
 
@@ -39,12 +44,16 @@ function CartCard({ name, image, price, size, id, removable }) {
       <div className="flex w-full flex-col justify-between font-oswald">
         <div className="flex justify-between text-xl">
           <p>{name}</p>
-          {removable ? <button
-            onClick={removeItem}
-            className="mr-2 flex items-center hover:rounded-full hover:bg-ue-red hover:text-white"
-          >
-            <CloseIcon />
-          </button> : ""}
+          {removable ? (
+            <button
+              onClick={removeItem}
+              className="mr-2 flex items-center hover:rounded-full hover:bg-ue-red hover:text-white"
+            >
+              <CloseIcon />
+            </button>
+          ) : (
+            ""
+          )}
         </div>
         <div className="flex justify-between">
           <p className="text-lg">Size: {size}</p>

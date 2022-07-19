@@ -1,6 +1,7 @@
 import React from "react";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import api from "../../helpers/api";
+import useAlerts from "../../hooks/useAlerts";
 
 /**
  * Staff component that is used to display the staff/admin info on a card & a remove button to delete an account.
@@ -10,14 +11,21 @@ import api from "../../helpers/api";
  * @returns
  */
 const Staff = ({ staff, setStaff }) => {
+  const {addAlert} = useAlerts()
   // onClick callback to remove/delete a staff account
   async function removeStaff(e) {
     e.preventDefault();
-    api.delete(`/admin/${staff._id}`).then(() => {
+    api.delete(`/admin/${staff._id}`)
+    .then(() => {
       setStaff((prevState) => {
         setStaff(prevState.filter((user) => user !== staff));
+
       });
-    });
+      addAlert({ severity: "success", message: "Successfully removed staff member"})
+    })
+    .catch((error) => {
+      addAlert({ severity: "warning", message: "Failed to remove staff member because of: " + (error.response.data || error.message)})
+    })
   }
 
   return (

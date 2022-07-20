@@ -6,8 +6,8 @@ import SelectedListingContext from "../.././contexts/selectedListing";
 import UserContext from "../../contexts/user";
 import api from "../../helpers/api";
 import useAlerts from "../../hooks/useAlerts";
-import HasRole from ".././auth/HasRole";
-import NotLoggedIn from ".././auth/NotLoggedIn";
+import HasRole from ".././Auth/HasRole";
+import NotLoggedIn from ".././Auth/NotLoggedIn";
 import BinIcon from ".././Icons/BinIcon";
 
 /**

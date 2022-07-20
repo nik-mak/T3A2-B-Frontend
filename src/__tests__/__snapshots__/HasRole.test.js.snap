@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`doesn't render when the user is undefined 1`] = `null`;
+
+exports[`doesn't render when the user role doesn't match a role in an empty roles prop 1`] = `null`;
+
+exports[`doesn't render when the user role doesn't match a role in an empty roles prop 2`] = `null`;
+
+exports[`doesn't render when the user role doesn't match a role in the roles prop 1`] = `null`;
+
+exports[`renders when the user role full roles prop 1`] = `null`;
+
+exports[`renders when the user role matches a role in the roles prop 1`] = `"TEST"`;

@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Can be rendered 1`] = `
+<div
+  className="m-4 flex flex-col space-y-4 bg-white p-2 font-oswald text-lg shadow-custom2"
+>
+  <div
+    className="flex flex-row items-center justify-between"
+  >
+    <h2
+      className="mr-2"
+    >
+      Test Heading
+    </h2>
+    <button
+      className="mr-2 flex w-[20px] flex-col items-center self-center hover:text-ue-red"
+      onClick={[Function]}
+    >
+      <svg
+        fill="none"
+        viewBox="0 0 37 44"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M36 7H3.91667L6.83333 43H30.1667L33.0833 7H1M18.5 16V34M25.7917 16L24.3333 34M11.2083 16L12.6667 34M12.6667 7L14.125 1H22.875L24.3333 7"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+      </svg>
+      <p
+        className="font-oswald text-base"
+      >
+        remove
+      </p>
+    </button>
+  </div>
+  <img
+    alt="Test Heading"
+    className="aspect-square w-full object-cover"
+    src=""
+  />
+  <div
+    className="flex justify-evenly"
+  >
+    <h3>
+      Size: 
+      Test Size
+    </h3>
+    <h3>
+      Price: 
+      <span
+        className="font-roman"
+      >
+        $
+      </span>
+      50
+    </h3>
+  </div>
+  <button
+    className="w-2/3 self-center rounded-full border border-slate-300 bg-ghost-white py-2 hover:bg-slate-100"
+    onClick={[Function]}
+  >
+    Manage Listing
+  </button>
+</div>
+`;

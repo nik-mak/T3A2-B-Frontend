@@ -86,7 +86,7 @@ function NavItemsWrapper() {
   }
 
   return (
-    <div className="flex space-x-5 pr-5 sm:space-x-10 sm:pr-10">
+    <ul className="flex space-x-5 pr-5 sm:space-x-10 sm:pr-10">
       {/* Bag Nav Item for Customers */}
       <HasRole roles={["customer"]}>
         <NavItem onClick={navigateToBag} itemName="Bag">
@@ -173,7 +173,7 @@ function NavItemsWrapper() {
         </NavItem>
         {showCart && <Cart />}
       </HasRole>
-    </div>
+    </ul>
   );
 }
 

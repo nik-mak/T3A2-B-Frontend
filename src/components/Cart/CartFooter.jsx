@@ -15,10 +15,8 @@ import { useNavigate } from "react-router-dom";
  */
 const CartFooter = () => {
   const { addAlert } = useAlerts();
-  const cartItems = useContext(CartContext)[0];
-  const setCartItems = useContext(CartContext)[1];
-  const cartTotal = useContext(CartTotalContext)[0];
-  const setCartTotal = useContext(CartTotalContext)[1];
+  const [cartItems, setCartItems] = useContext(CartContext);
+  const [cartTotal, setCartTotal] = useContext(CartTotalContext);
 
   const navigate = useNavigate();
   const navigateToBag = () => {
@@ -26,25 +24,30 @@ const CartFooter = () => {
   };
 
   const emptyCart = () => {
-    api
-      .delete("/cart")
-      .then(() => {
-        setCartItems([]);
-      })
-      .then(() => setCartTotal(0))
-      .catch((error) => {
-        addAlert({
-          severity: "warning",
-          message: "Failed to empty the cart because of: " + (error.response.data || error.message),
+     //eslint-disable-line
+    const result = window.confirm("Are you sure you want to empty your cart")
+    if (result) {
+      api
+        .delete("/cart")
+        .then(() => {
+          setCartItems([]);
         })
-      })
-      .finally(navigateToBag())
+        .then(() => setCartTotal(0))
+        .catch((error) => {
+          addAlert({
+            severity: "warning",
+            message:
+              "Failed to empty the cart because of: " +
+              (error.response.data || error.message),
+          });
+        })
+        .finally(navigateToBag());
+    }
   };
 
   // Checkout function to move items from cart to orders
   // Marks items as sold
   const order = () => {
-
     if (cartItems.length > 0) {
       api
         .post("/order/add")
@@ -59,14 +62,14 @@ const CartFooter = () => {
     } else {
       addAlert({
         severity: "warning",
-        message: "Cart is empty"
-      })
+        message: "Cart is empty",
+      });
     }
   };
 
   return (
-    <div className="flex w-full flex-col justify-end ml-1 z-[99]">
-      <div className="mb-2 mt-4 flex justify-center" onClick={emptyCart}>
+    <div className="z-[99] ml-1 flex w-full flex-col justify-end">
+      <div className="mb-2 mt-4 flex justify-center" onClick={() => emptyCart()}>
         <button className="flex h-[49px] w-[122px] flex-row items-center rounded-full border-2 border-ue-red text-[20px] text-ue-red hover:bg-ue-red hover:text-white">
           <div className="flex justify-center pl-1 pt-px">
             <DeleteOutlineIcon />
@@ -77,7 +80,7 @@ const CartFooter = () => {
       <div>
         <hr></hr>
         <div className="flex justify-center">
-          <p className="text-xl pb-2">Order Summary</p>
+          <p className="pb-2 text-xl">Order Summary</p>
         </div>
         <div className="flex flex-row justify-between">
           <div className="pl-4">
@@ -89,10 +92,10 @@ const CartFooter = () => {
           </div>
           <button
             onClick={() => {
-              order()
-              navigateToBag()
+              order();
+              navigateToBag();
             }}
-            className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue text-[20px] pl-3 text-white hover:bg-cyan-cobalt-blue"
+            className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue pl-3 text-[20px] text-white hover:bg-cyan-cobalt-blue"
           >
             Purchase
             <NavigateNextIcon />

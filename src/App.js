@@ -8,18 +8,35 @@ import Bag from "./pages/Bag";
 import AdminDashboard from "./pages/AdminDashboard";
 import PrivateRoute from "./components/Auth/PrivateRoute";
 import ActiveModals from "./components/modals/ActiveModals";
+import PageNotFound from "./pages/PageNotFound";
+// import Confirmation from "./components/Confirmation";
 
 function App() {
   return (
     <GlobalContexts>
       <BrowserRouter>
         <Navbar />
-        <ActiveModals/>
+        <ActiveModals />
         <Alerts />
         <Routes>
           <Route path="/" element={<Catalogue />} />
-          <Route path="/admin" element={<PrivateRoute roles={["admin","staff"]}><AdminDashboard /></PrivateRoute>} />
-          <Route path="/bag" element={<PrivateRoute roles={["admin","staff", "customer"]}><Bag /></PrivateRoute>} />
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute roles={["admin", "staff"]}>
+                <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/bag"
+            element={
+              <PrivateRoute roles={["admin", "staff", "customer"]}>
+                <Bag />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </GlobalContexts>

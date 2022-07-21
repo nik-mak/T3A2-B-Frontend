@@ -13,7 +13,7 @@ Note: If you run into files not found when you have started the server but the c
 
 # Dependencies
 
-In this project the front end makes use of the following libraries:
+In this project the front end makes use of the following dependencies and libraries:
 
 1. [React](https://reactjs.org/)
    1. A javascript framework used to build user interfaces for web application.
@@ -24,3 +24,14 @@ In this project the front end makes use of the following libraries:
    1. A promise based HTTP client for the browser which used to make HTTP requests easier. 
 4. [Day.JS](https://day.js.org/)
    1. A small 2kB extension that enables parsing and manipulating dates and times in the browser easier and faster.
+5. [Tailwind]
+
+# Project Management
+
+Trello Board: [link](https://trello.com/invite/b/BzgS0oZt/641fd4be604d47fca55fb75d6d5855c0/team-project)
+
+For our project we decided to allocate tasks based on the teams strengths. This lead to Gisele primarily working in the backend, Nik on both ends and Ben on the front end. In addition to this we all attended daily stand up (excl weekends) where we discussed what we were working on and the cards we would be trying to finish. Once assigned a card in our daily standup we would write  our checklist fo that card and input a dude date to track our progress.In addition to this you will notice that we limited our scope significantly so we could prioritize our MVP product. The difficulty levels on each card was also displayed on our Trello Board using labels. To see our daily progress look at our Trello Board where we logged daily screenshots of our Trello Board, our minutes and our stand ups. 
+
+Lastly, for source control the team made use of git and git branches to organize the development of features for the app. A copy of our git-log can be found below:
+
+!!! INSERT GITLOG LINK HERE

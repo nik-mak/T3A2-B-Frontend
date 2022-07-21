@@ -17,7 +17,9 @@ import CartCard from "../cart/CartCard";
  * @return {HTML} a listing card
  */
 function OrderCard({ index, date, shopperName, items, totalPrice, collected }) {
+  // Defines the collection state of the order i.e. [true, false] = [collected, not collected]
   const [isCollected, setIsCollected] = useState(collected);
+  // Defines the addAlerts method used to add alerts in handleCollection
   const { addAlert } = useAlerts();
   function handleCollection() {
     api

@@ -23,13 +23,16 @@ const CartContent = () => {
                   price={item.price}
                   size={item.size}
                   id={item._id}
+                  removable={true}
                 />
               </div>
             );
           })}
         </div>
       ) : (
-        <p>Cart is empty</p>
+        <div className="h-[calc(100vh-355px)] overflow-auto pt-2 md:h-[calc(100vh-371px)]">
+          <p>Cart is empty</p>
+        </div>
       )}
     </>
   );

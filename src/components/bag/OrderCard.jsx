@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import api from "../../helpers/api";
 import useAlerts from "../../hooks/useAlerts";
-import HasRole from "../Auth/HasRole";
-import CartCard from "../Cart/CartCard";
+import HasRole from "../auth/HasRole";
+import CartCard from "../cart/CartCard";
 
 /**
  * ListingCard is a component that handles rendering a listing card to be displayed in the catalogue

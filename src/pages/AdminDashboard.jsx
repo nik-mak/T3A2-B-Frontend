@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import StaffCardCollection from "../components/Admin/StaffCardCollection";
+import StaffCardCollection from "../components/admin/StaffCardCollection";
 import AddStaffModal from "../components/modals/AddStaffModal";
 import api from "../helpers/api";
 import useModalsReducer from "../hooks/reducers/ModalsReducer";

@@ -23,6 +23,7 @@ const CartContent = () => {
                   price={item.price}
                   size={item.size}
                   id={item._id}
+                  removable={true}
                 />
               </div>
             );

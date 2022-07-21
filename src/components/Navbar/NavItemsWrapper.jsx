@@ -41,13 +41,17 @@ function NavItemsWrapper() {
   // defines the alerts dispatch method
   const { addAlert } = useAlerts();
 
+  // defines cart states using context provider
+  const [showCart, setShowCart] = useContext(ShowCartContext);
   const setCartItems = useContext(CartContext)[1];
   const setCartTotal = useContext(CartTotalContext)[1];
 
   const navigate = useNavigate();
 
-  const showCart = useContext(ShowCartContext)[0];
-  const setShowCart = useContext(ShowCartContext)[1];
+  
+
+  // const showCart = useContext(ShowCartContext)[0];
+  // const setShowCart = useContext(ShowCartContext)[1];
 
   // navigate to bag handler
   const navigateToBag = () => {
@@ -125,26 +129,32 @@ function NavItemsWrapper() {
           ) : (
             <Paper className={"absolute top-[80px] sm:top-[97px]"}>
               <MenuList dense>
-                <MenuItem onClick={() => {
-                  navigateToHome()
-                  setSettingsState(!settingsState)
-                }}>
+                <MenuItem
+                  onClick={() => {
+                    navigateToHome();
+                    setSettingsState(!settingsState);
+                  }}
+                >
                   <ListItemText>Manage Listings</ListItemText>
                 </MenuItem>
                 <HasRole roles={["admin"]}>
                   <Divider />
-                  <MenuItem onClick={() => {
-                  navigateToAdmin()
-                  setSettingsState(!settingsState)
-                }}>
+                  <MenuItem
+                    onClick={() => {
+                      navigateToAdmin();
+                      setSettingsState(!settingsState);
+                    }}
+                  >
                     <ListItemText>Admin Dashboard</ListItemText>
                   </MenuItem>
                 </HasRole>
                 <Divider />
-                <MenuItem onClick={() => {
-                  navigateToBag()
-                  setSettingsState(!settingsState)
-                }}>
+                <MenuItem
+                  onClick={() => {
+                    navigateToBag();
+                    setSettingsState(!settingsState);
+                  }}
+                >
                   <ListItemText>Listings on hold</ListItemText>
                 </MenuItem>
               </MenuList>

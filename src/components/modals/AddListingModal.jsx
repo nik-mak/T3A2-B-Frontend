@@ -28,11 +28,16 @@ function AddListingModal({ open, onClose }) {
     api
       .post("/items/add", formData)
       .then(() => {
-        addAlert({ severity: "success", message: "Successfully Posted Item" });        
+        addAlert({ severity: "success", message: "Successfully Posted Item" });
       })
       .catch((error) => {
-        addAlert({ severity: "warning", message: "Failed to create item because of: " + (error.response.data || error.message)});
-      })
+        addAlert({
+          severity: "warning",
+          message:
+            "Failed to create item because of: " +
+            (error.response.data || error.message),
+        });
+      });
     onClose();
   }
 

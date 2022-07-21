@@ -24,25 +24,20 @@ const CartFooter = () => {
   };
 
   const emptyCart = () => {
-     //eslint-disable-line
-    const result = window.confirm("Are you sure you want to empty your cart")
-    if (result) {
-      api
-        .delete("/cart")
-        .then(() => {
-          setCartItems([]);
-        })
-        .then(() => setCartTotal(0))
-        .catch((error) => {
-          addAlert({
-            severity: "warning",
-            message:
-              "Failed to empty the cart because of: " +
-              (error.response.data || error.message),
-          });
-        })
-        .finally(navigateToBag());
-    }
+    api
+      .delete("/cart")
+      .then(() => {
+        setCartItems([]);
+      })
+      .then(() => setCartTotal(0))
+      .catch((error) => {
+        addAlert({
+          severity: "warning",
+          message:
+            "Failed to empty the cart because of: " +
+            (error.response.data || error.message),
+        });
+      });
   };
 
   // Checkout function to move items from cart to orders
@@ -58,7 +53,8 @@ const CartFooter = () => {
             severity: "warning",
             message: "An unexpected error occurred",
           });
-        });
+        })
+        .finally(navigateToBag());
     } else {
       addAlert({
         severity: "warning",
@@ -69,7 +65,7 @@ const CartFooter = () => {
 
   return (
     <div className="z-[99] ml-1 flex w-full flex-col justify-end">
-      <div className="mb-2 mt-4 flex justify-center" onClick={() => emptyCart()}>
+      <div className="mb-2 mt-4 flex justify-center" onClick={emptyCart}>
         <button className="flex h-[49px] w-[122px] flex-row items-center rounded-full border-2 border-ue-red text-[20px] text-ue-red hover:bg-ue-red hover:text-white">
           <div className="flex justify-center pl-1 pt-px">
             <DeleteOutlineIcon />
@@ -93,7 +89,6 @@ const CartFooter = () => {
           <button
             onClick={() => {
               order();
-              navigateToBag();
             }}
             className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue pl-3 text-[20px] text-white hover:bg-cyan-cobalt-blue"
           >

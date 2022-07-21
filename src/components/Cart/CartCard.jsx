@@ -12,10 +12,9 @@ import useAlerts from "../../hooks/useAlerts";
  * @return {HTML} a styled card
  */
 function CartCard({ name, image, price, size, id, removable }) {
+  const [cartTotal, setCartTotal] = useContext(CartTotalContext);
   const setCartItems = useContext(CartContext)[1];
-  const cartTotal = useContext(CartTotalContext)[0];
-  const setCartTotal = useContext(CartTotalContext)[1];
-  const {addAlert} = useAlerts()
+  const { addAlert } = useAlerts();
 
   const removeItem = () => {
     api
@@ -30,7 +29,7 @@ function CartCard({ name, image, price, size, id, removable }) {
           severity: "warning",
           message: "Failed to remove item because of: " + error.message,
         });
-      }) 
+      })
       .finally(() => setCartTotal(cartTotal - price));
   };
 

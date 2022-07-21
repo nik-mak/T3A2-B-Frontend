@@ -6,8 +6,8 @@ import SelectedListingContext from "../.././contexts/selectedListing";
 import UserContext from "../../contexts/user";
 import api from "../../helpers/api";
 import useAlerts from "../../hooks/useAlerts";
-import HasRole from ".././auth/HasRole";
-import NotLoggedIn from ".././auth/NotLoggedIn";
+import HasRole from ".././Auth/HasRole";
+import NotLoggedIn from ".././Auth/NotLoggedIn";
 import BinIcon from ".././Icons/BinIcon";
 
 /**
@@ -25,8 +25,8 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
   // Defines the user so that roles can be checked when rendering components.
   const { user } = useContext(UserContext);
   // Defines teh cart items to be displayed in the cart
-  const [cartItems, setCartItems] = useContext(CartContext)
-  const [cartTotal, setCartTotal] = useContext(CartTotalContext)
+  const [cartItems, setCartItems] = useContext(CartContext);
+  const [cartTotal, setCartTotal] = useContext(CartTotalContext);
 
   // Defines the addAlert method used to create new alerts
   const { addAlert } = useAlerts();
@@ -42,21 +42,26 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
    * A function that handles removing a listing item from the catalogue using the itemID
    */
   function removeHandler() {
-    api
-      .delete(`/items/${itemID}`)
-      .then(() => {
-        addAlert({
-          severity: "success",
-          message: `Successfully removed item '${heading}'`,
+    const result = window.confirm("Are you sure?");
+    if (result) {
+      api
+        .delete(`/items/${itemID}`)
+        .then(() => {
+          addAlert({
+            severity: "success",
+            message: `Successfully removed item '${heading}'`,
+          });
+          setIsRemoved(true);
+        })
+        .catch((error) => {
+          addAlert({
+            severity: "warning",
+            message:
+              `Failed to remove item '${heading}' because of: ` +
+              (error.response.data || error.message),
+          });
         });
-        setIsRemoved(true);
-      })
-      .catch((error) => {
-        addAlert({
-          severity: "warning",
-          message: `Failed to remove item '${heading}' because of: ` + (error.response.data || error.message),
-        });
-      });
+    }
   }
   /**
    * A function that handles adding a listing item to a users cart using the itemID
@@ -82,7 +87,7 @@ function ListingCard({ heading, size, price, imageURL, itemID }) {
             severity: "warning",
             message: "Please login to add this item to your cart",
           });
-        } 
+        }
       });
   }
 

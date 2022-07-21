@@ -10,9 +10,9 @@ import LogoutIcon from "../Icons/LogoutIcon";
 import api from "../../helpers/api";
 import UserContext from "../../contexts/user";
 import useAlerts from "../../hooks/useAlerts";
-import HasRole from "../auth/HasRole";
-import LoggedIn from "../auth/LoggedIn";
-import NotLoggedIn from "../auth/NotLoggedIn";
+import HasRole from "../Auth/HasRole";
+import LoggedIn from "../Auth/LoggedIn";
+import NotLoggedIn from "../Auth/NotLoggedIn";
 import AddListingIcon from "../Icons/AddListingIcon";
 import CartContext from "../../contexts/cart";
 import CartTotalContext from "../../contexts/total";
@@ -24,7 +24,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ModalsContext from "../../contexts/modals";
 import ShowCartContext from "../../contexts/showCart";
-import Cart from "../cart/Cart";
+import Cart from "../Cart/Cart";
 
 /**
  * Nav Item wrapper that contains nav items and relevant modals
@@ -41,13 +41,17 @@ function NavItemsWrapper() {
   // defines the alerts dispatch method
   const { addAlert } = useAlerts();
 
+  // defines cart states using context provider
+  const [showCart, setShowCart] = useContext(ShowCartContext);
   const setCartItems = useContext(CartContext)[1];
   const setCartTotal = useContext(CartTotalContext)[1];
 
   const navigate = useNavigate();
 
-  const showCart = useContext(ShowCartContext)[0];
-  const setShowCart = useContext(ShowCartContext)[1];
+  
+
+  // const showCart = useContext(ShowCartContext)[0];
+  // const setShowCart = useContext(ShowCartContext)[1];
 
   // navigate to bag handler
   const navigateToBag = () => {
@@ -125,26 +129,32 @@ function NavItemsWrapper() {
           ) : (
             <Paper className={"absolute top-[80px] sm:top-[97px]"}>
               <MenuList dense>
-                <MenuItem onClick={() => {
-                  navigateToHome()
-                  setSettingsState(!settingsState)
-                }}>
+                <MenuItem
+                  onClick={() => {
+                    navigateToHome();
+                    setSettingsState(!settingsState);
+                  }}
+                >
                   <ListItemText>Manage Listings</ListItemText>
                 </MenuItem>
                 <HasRole roles={["admin"]}>
                   <Divider />
-                  <MenuItem onClick={() => {
-                  navigateToAdmin()
-                  setSettingsState(!settingsState)
-                }}>
+                  <MenuItem
+                    onClick={() => {
+                      navigateToAdmin();
+                      setSettingsState(!settingsState);
+                    }}
+                  >
                     <ListItemText>Admin Dashboard</ListItemText>
                   </MenuItem>
                 </HasRole>
                 <Divider />
-                <MenuItem onClick={() => {
-                  navigateToBag()
-                  setSettingsState(!settingsState)
-                }}>
+                <MenuItem
+                  onClick={() => {
+                    navigateToBag();
+                    setSettingsState(!settingsState);
+                  }}
+                >
                   <ListItemText>Listings on hold</ListItemText>
                 </MenuItem>
               </MenuList>

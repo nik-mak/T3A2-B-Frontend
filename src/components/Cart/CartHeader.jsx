@@ -15,9 +15,8 @@ import { useNavigate } from "react-router-dom";
  */
 const CartHeader = () => {
   const { addAlert } = useAlerts();
+  const [cartItems, setCartItems] = useContext(CartContext);
   const setShowCart = useContext(ShowCartContext)[1];
-  const cartItems = useContext(CartContext)[0];
-  const setCartItems = useContext(CartContext)[1];
   const setCartTotal = useContext(CartTotalContext)[1];
 
   const navigate = useNavigate();
@@ -41,7 +40,7 @@ const CartHeader = () => {
               (error.response.data || error.message),
           });
         })
-        .finally(navigateToBag())
+        .finally(navigateToBag());
     } else {
       addAlert({
         severity: "warning",
@@ -64,7 +63,7 @@ const CartHeader = () => {
       </div>
       <button
         onClick={() => {
-          order()
+          order();
         }}
         className="mr-[10px] h-[49px] w-[122px] rounded-full bg-checkout-blue pl-3 text-[20px] text-white hover:bg-cyan-cobalt-blue"
       >

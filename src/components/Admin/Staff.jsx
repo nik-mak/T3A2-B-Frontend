@@ -11,21 +11,33 @@ import useAlerts from "../../hooks/useAlerts";
  * @returns
  */
 const Staff = ({ staff, setStaff }) => {
-  const {addAlert} = useAlerts()
+  const { addAlert } = useAlerts();
+
   // onClick callback to remove/delete a staff account
   async function removeStaff(e) {
     e.preventDefault();
-    api.delete(`/admin/${staff._id}`)
-    .then(() => {
-      setStaff((prevState) => {
-        setStaff(prevState.filter((user) => user !== staff));
-
-      });
-      addAlert({ severity: "success", message: "Successfully removed staff member"})
-    })
-    .catch((error) => {
-      addAlert({ severity: "warning", message: "Failed to remove staff member because of: " + (error.response.data || error.message)})
-    })
+    const result = window.confirm("Are you sure?");
+    if (result) {
+      api
+        .delete(`/admin/${staff._id}`)
+        .then(() => {
+          setStaff((prevState) => {
+            setStaff(prevState.filter((user) => user !== staff));
+          });
+          addAlert({
+            severity: "success",
+            message: "Successfully removed staff member",
+          });
+        })
+        .catch((error) => {
+          addAlert({
+            severity: "warning",
+            message:
+              "Failed to remove staff member because of: " +
+              (error.response.data || error.message),
+          });
+        });
+    }
   }
 
   return (

@@ -31,7 +31,8 @@ function SignUpModal({ open, onClose }) {
       addAlert({severity:"success", message:"Successfully Signed Up & Logged In"})
     })
     .catch( (error) => { 
-      addAlert({severity:"warning", message: "Failed to register because of: " + (error.response.data["error"] || error.response.data || error.message)})
+      console.log(error)
+      addAlert({severity:"warning", message: (error.response.data["error"]) || ("Failed to register because of: " + (error.response.data || error.message))})
     })
     .finally( () => {
       onClose()

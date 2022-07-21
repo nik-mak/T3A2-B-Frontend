@@ -9,6 +9,8 @@ To begin installing this app please clone the app into a folder from github. [li
 3. Type into the terminal 'npm install' and wait for it to complete the installation.
 4. Type into the terminal 'npm start' to start the application on your local machine.
 
+Note: If you run into files not found when you have started the server but the components are present make sure that the directory name for the component matches the import statement. This should not effect your build if you deploy the website online using a platform such as netlify.
+
 # Dependencies
 
 In this project the front end makes use of the following libraries:

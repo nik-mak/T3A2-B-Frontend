@@ -15,11 +15,17 @@ import useModalsReducer from "../hooks/reducers/ModalsReducer";
  * @return {HTML} the catalogue page
  */
 function Catalogue() {
+  // Defines the options used in the filter dropdown
   const options = ["recent", "price(high - low)", "price(low - high)"];
+  // Defines the initial option state and callback used by the dropdown
   const [selected, setSelected] = useState(options[0]);
+  // Defines the listings state and callback to be displayed in the catalogue
   const [listings, setListings] = useState([]);
+  // Defines the current page the user is on
   const [page, setPage] = useState(1);
+  // Defines the addAlert method used to render alerts in the useEffect
   const { addAlert } = useAlerts();
+  // Defines the number of pages to be displayed in the pagination component
   const [pageCount, setPageCount] = useState(1);
   const [modalStates, setModalStates] = useModalsReducer({
     manageListing: false,

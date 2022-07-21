@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import api from "../../helpers/api";
 import useAlerts from "../../hooks/useAlerts";
-import HasRole from "../Auth/HasRole";
-import CartCard from "../Cart/CartCard";
+import HasRole from "../auth/HasRole";
+import CartCard from "../cart/CartCard";
 
 /**
  * ListingCard is a component that handles rendering a listing card to be displayed in the catalogue
@@ -17,7 +17,9 @@ import CartCard from "../Cart/CartCard";
  * @return {HTML} a listing card
  */
 function OrderCard({ index, date, shopperName, items, totalPrice, collected }) {
+  // Defines the collection state of the order i.e. [true, false] = [collected, not collected]
   const [isCollected, setIsCollected] = useState(collected);
+  // Defines the addAlerts method used to add alerts in handleCollection
   const { addAlert } = useAlerts();
   function handleCollection() {
     api

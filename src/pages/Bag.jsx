@@ -15,13 +15,19 @@ import { Pagination } from "@mui/material";
 function Bag() {
   // Defines the filters used in the filter dropdown
   const filters = ["recent", "pending", "collected"];
-
+  // Defines the addAlerts method used to render alerts
   const { addAlert } = useAlerts();
+  // Defines the orders initial state and callback used to render and set orders to be displayed in the bag
   const [orders, setOrders] = useState([]);
+  // Defines the initial filter state
   const [filter, setFilter] = useState(filters[0]);
+  // Defines the current page the user is on
   const [page, setPage] = useState(1);
+  // Defines the number of pages to be displayed in the pagination component
   const [pageCount, setPageCount] = useState();
+  // Defines the current logged in user
   const currentUser = useContext(UserContext)[0];
+  
   // useEffect to call the API and set the pages and orders to be displayed on the bag page on mount or when page/filter/selectedSort state changes
   useEffect(() => {
     api
@@ -46,10 +52,20 @@ function Bag() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, filter]);
 
+  /**
+   * Sort handler used to update the catalogue listings when there is a change in the value of the Sort By button
+   *
+   * @param {String} value a string containing the data needed by the backend to organize/filter the catalogue listings
+   */
   function handleFilter(value) {
     setFilter(value);
   }
 
+  /**
+   * Pagination Handler used to update the catalogue listings when there is a change in the value of the pagination button
+   *
+   * @param {String} value a string containing the data needed by the backend to organize/filter the catalogue listings
+   */
   function handlePagination(e, value) {
     setPage(value);
   }

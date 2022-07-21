@@ -71,9 +71,7 @@ function FormModal({
     // ensures that the FormData is cleared after each submit
     setFormData(formFields);
   }
-
-
-
+  
   return (
     <Modal
       open={open}

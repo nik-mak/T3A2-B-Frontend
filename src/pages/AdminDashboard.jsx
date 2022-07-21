@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import StaffCardCollection from "../components/Admin/StaffCardCollection";
+import StaffCardCollection from "../components/admin/StaffCardCollection";
 import AddStaffModal from "../components/modals/AddStaffModal";
 import api from "../helpers/api";
 import useModalsReducer from "../hooks/reducers/ModalsReducer";
@@ -11,8 +11,9 @@ import useAlerts from "../hooks/useAlerts";
  * @returns {HTML} the admin dashboard
  */
 const AdminDashboard = () => {
+  //  Defines the staff and setStaff array to be displayed on the admin dashboard
   const [staff, setStaff] = useState([]);
-  const {addAlert} = useAlerts()
+  const { addAlert } = useAlerts();
   // Initial state for the addStaff Modal
   const initialState = { addStaff: false };
   const [modalStates, setModalStates] = useModalsReducer(initialState);
@@ -25,8 +26,13 @@ const AdminDashboard = () => {
         setStaff(data);
       })
       .catch((error) => {
-        addAlert({severity:"warning", message:"Failed to retrieve staff because of: " + (error.response.data || error.message)})
-      });
+        addAlert({
+          severity: "warning",
+          message:
+            "Failed to retrieve staff because of: " +
+            (error.response.data || error.message),
+        });
+      }); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

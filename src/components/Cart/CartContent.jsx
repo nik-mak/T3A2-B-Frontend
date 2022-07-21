@@ -30,7 +30,9 @@ const CartContent = () => {
           })}
         </div>
       ) : (
-        <p>Cart is empty</p>
+        <div className="h-[calc(100vh-355px)] overflow-auto pt-2 md:h-[calc(100vh-371px)]">
+          <p>Cart is empty</p>
+        </div>
       )}
     </>
   );

@@ -31,12 +31,19 @@ function AddListingModal({ open, onClose }) {
         addAlert({ severity: "success", message: "Successfully Posted Item" });
       })
       .catch((error) => {
-        addAlert({
-          severity: "warning",
-          message:
-            "Failed to create item because of: " +
-            (error.response.data || error.message),
-        });
+        if (error.response.data.errors) {
+          Object.keys(error.response.data.errors).map((key) => {
+            addAlert({
+              severity: "warning",
+              message: error.response.data.errors[key].message,
+            });
+          });
+        } else {
+          addAlert({
+            severity: "warning",
+            message: "Failed to create item because of: " + error.response.data,
+          });
+        }
       });
     onClose();
   }

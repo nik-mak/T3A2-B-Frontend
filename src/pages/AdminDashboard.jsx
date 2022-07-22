@@ -17,6 +17,12 @@ const AdminDashboard = () => {
   // Initial state for the addStaff Modal
   const initialState = { addStaff: false };
   const [modalStates, setModalStates] = useModalsReducer(initialState);
+  const [staffCount, setStaffCount] = useState(0)
+
+  // Sets the staff count which is used to grab the staff ids whenever the staff array changes
+  useEffect(() => {
+    setStaffCount(staff.length)
+  }, [staff])
 
   // Fetch all staff and admin accounts from the db
   useEffect(() => {
@@ -33,7 +39,7 @@ const AdminDashboard = () => {
             (error.response.data || error.message),
         });
       }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [staffCount]);
 
   return (
     <>

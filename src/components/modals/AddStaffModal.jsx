@@ -2,6 +2,7 @@ import React from "react";
 import FormModal from "./FormModal";
 import api from "../../helpers/api";
 import useAlerts from "../../hooks/useAlerts";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Add staff modal  component used to display the add staff form
@@ -35,7 +36,23 @@ function AddStaffModal({ open, onClose, setStaff, staff }) {
         });
       })
       .catch((error) => {
-        addAlert({ severity: "warning", message: "Failed to create new staff because of: " +(error.response.data || error.message) });
+        if (
+          error.response.data.name ||
+          error.response.data.email ||
+          error.response.data.password
+        ) {
+          Object.keys(error.response.data).map((errorKey) => {
+            addAlert({
+              severity: "warning",
+              message: error.response.data[errorKey],
+            });
+          });
+        } else {
+          addAlert({
+            severity: "warning",
+            message: "Failed to register because: " + error.response.data,
+          });
+        }
       })
       .finally(() => {
         onClose();

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ModalsContext from "../../contexts/modals";
-import HasRole from "../auth/HasRole";
-import NotLoggedIn from "../auth/NotLoggedIn";
+import HasRole from "../Auth/HasRole";
+import NotLoggedIn from "../Auth/NotLoggedIn";
 import LoginModal from "./LoginModal";
 import AddListingModal from "./AddListingModal";
 import SignUpModal from "./SignUpModal";

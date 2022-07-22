@@ -14,6 +14,15 @@ To begin installing this app please clone the app into a folder from github. [li
 
 Note: If you run into files not found when you have started the server but the components are present make sure that the directory name for the component matches the import statement. This should not effect your build if you deploy the website online using a platform such as netlify.
 
+Note: If running locally, make sure the correct URLs are present in `src/helpers/api.js` e.g.:
+```js
+const api = axios.create({
+  baseURL: "http://localhost:4000/api/v1",
+  withCredentials: true,
+  'Access-Control-Allow-Origin': 'http://localhost:4000'
+});
+```
+
 ### Testing
 To run the tests run `npm test` and follow the prompts.
 

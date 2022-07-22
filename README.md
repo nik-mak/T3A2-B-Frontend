@@ -1,4 +1,7 @@
+Full readme can be found here: https://github.com/desperate-housewares/app-readme
+
 # Installation
+
 
 To begin installing this app please clone the app into a folder from github. [link](https://github.com/desperate-housewares/dh-frontend-cra)
 
@@ -32,6 +35,6 @@ Trello Board: [link](https://trello.com/invite/b/BzgS0oZt/641fd4be604d47fca55fb7
 
 For our project we decided to allocate tasks based on the teams strengths. This lead to Gisele primarily working in the backend, Nik on both ends and Ben on the front end. In addition to this we all attended daily stand up (excl weekends) where we discussed what we were working on and the cards we would be trying to finish. Once assigned a card in our daily standup we would write  our checklist fo that card and input a dude date to track our progress.In addition to this you will notice that we limited our scope significantly so we could prioritize our MVP product. The difficulty levels on each card was also displayed on our Trello Board using labels. To see our daily progress look at our Trello Board where we logged daily screenshots of our Trello Board, our minutes and our stand ups. 
 
-Lastly, for source control the team made use of git and git branches to organize the development of features for the app. A copy of our git-log can be found below:
+We did snapshot testing for some components on the frontend and unit testing and integration testing for components on the backed. In addition to this we also did user flow manual tests. These can be found here: [userFlowTests](https://docs.google.com/spreadsheets/d/1cAdR8FZKEPNZPPeULztCVAeeWFnUP69NutmQy8QTe40/edit?usp=sharing)
 
-!!! INSERT GITLOG LINK HERE
+Lastly, for source control the team made use of git and git branches to organize the development of features for the app. A copy of our git-log can be found here: [commits](https://github.com/desperate-housewares/dh-backend/commits/main)
